@@ -142,6 +142,25 @@ func SignUp(db *mongo.Database, col string, insertedDoc model.User) (insertedID 
 	return InsertOneDoc(db, col, insertedDoc)
 }
 
+func GCFPostHandlerSignUp(collectionname string, r *http.Request) string {
+	var Response model.Credential
+	Response.Status = false
+	var datauser model.User
+	err := json.NewDecoder(r.Body).Decode(&datauser)
+	if err != nil {
+		Response.Message = "error parsing application/json: " + err.Error()
+		return GCFReturnStruct(Response)
+	}
+	_, err = SignUp(MongoConnect(), collectionname, datauser)
+	if err != nil {
+		Response.Message = err.Error()
+		return GCFReturnStruct(Response)
+	}
+	Response.Status = true
+	Response.Message = "Halo " + datauser.FirstName + " " + datauser.LastName
+	return GCFReturnStruct(Response)
+}
+
 func LogIn(db *mongo.Database, col string, insertedDoc model.User) (email string, err error) {
 	if insertedDoc.Email == "" || insertedDoc.Password == "" {
 		return email, fmt.Errorf("mohon untuk melengkapi data")
@@ -210,3 +229,6 @@ func GCFReturnStruct(DataStuct any) string {
 	jsondata, _ := json.Marshal(DataStuct)
 	return string(jsondata)
 }
+
+// package baru
+

@@ -21,22 +21,22 @@ func TestGetUserFromEmail(t *testing.T) {
 	}
 }
 
-func TestInsertOneItem (t*testing.T) {
+func TestInsertOneItem(t *testing.T) {
 	var doc model.Item
-   doc.Name = "Seblak"
-   doc.Quantity = "10"
-   doc.Category = "Makanan"
-   if doc.Name == "" || doc.Quantity == "" || doc.Category == "" {
-	   t.Errorf("mohon untuk melengkapi data")
-   } else {
-	   insertedID, err := module.InsertOneDoc(db, "item", doc)
-	   if err != nil {
-		   t.Errorf("Error inserting document: %v", err)
-		   fmt.Println("Data tidak berhasil disimpan")
-	   } else {
-	   fmt.Println("Data berhasil disimpan dengan id :", insertedID.Hex())
-	   }
-   }
+	doc.Name = "Seblak"
+	doc.Quantity = "10"
+	doc.Category = "Makanan"
+	if doc.Name == "" || doc.Quantity == "" || doc.Category == "" {
+		t.Errorf("mohon untuk melengkapi data")
+	} else {
+		insertedID, err := module.InsertOneDoc(db, "item", doc)
+		if err != nil {
+			t.Errorf("Error inserting document: %v", err)
+			fmt.Println("Data tidak berhasil disimpan")
+		} else {
+			fmt.Println("Data berhasil disimpan dengan id :", insertedID.Hex())
+		}
+	}
 }
 
 func TestGetAllDoc(t *testing.T) {
@@ -46,7 +46,7 @@ func TestGetAllDoc(t *testing.T) {
 }
 
 func TestUpdateOneDoc(t *testing.T) {
- 	var docs model.User
+	var docs model.User
 	id := "649063d3ad72e074286c61e8"
 	objectId, _ := primitive.ObjectIDFromHex(id)
 	docs.FirstName = "Mickey"
@@ -66,10 +66,10 @@ func TestUpdateOneDoc(t *testing.T) {
 	}
 }
 
-func TestGetItemFromID(t *testing.T){
+func TestGetItemFromID(t *testing.T) {
 	id := "64d0b1104255ba95ba588512"
 	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	doc, err := module.GetItemFromID(objectId)
@@ -83,14 +83,14 @@ func TestSignUp(t *testing.T) {
 	var doc model.User
 	doc.FirstName = "Agita"
 	doc.LastName = "Nurfadillah"
-	doc.Email = "agitanurfadillah1003@gmail.com"
-	doc.Password = "654321"
-	doc.Confirmpassword = "654321"
+	doc.Email = "agitanurfadillah1004@gmail.com"
+	doc.Password = "987654321"
+	doc.Confirmpassword = "987654321"
 	insertedID, err := module.SignUp(db, "user", doc)
 	if err != nil {
 		t.Errorf("Error inserting document: %v", err)
 	} else {
-	fmt.Println("Data berhasil disimpan dengan id :", insertedID.Hex())
+		fmt.Println("Data berhasil disimpan dengan id :", insertedID.Hex())
 	}
 }
 
