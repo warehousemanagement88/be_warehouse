@@ -113,9 +113,3 @@ func TestGeneratePrivateKeyPaseto(t *testing.T) {
 	hasil, err := module.Encode("agitanurfadillah1003@gmail.com", privateKey)
 	fmt.Println("ini hasil :", hasil, err)
 }
-
-func TestTable(t *testing.T) {
-	var docs []model.Item
-	hasil := module.GetAllDocs(db, "item", docs)
-	fmt.Println(hasil)
-}
