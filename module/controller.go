@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"aidanwoods.dev/go-paseto"
-	"github.com/warehousemanagement88/be_warehouse/model"
 	"github.com/badoux/checkmail"
+	"github.com/warehousemanagement88/be_warehouse/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -86,7 +86,7 @@ func UpdateOneDoc(db *mongo.Database, col string, id primitive.ObjectID, doc int
 	result, err := db.Collection(col).UpdateOne(context.Background(), filter, bson.M{"$set": doc})
 	if err != nil {
 		fmt.Printf("UpdatePresensi: %v\n", err)
-		return 
+		return
 	}
 	if result.ModifiedCount == 0 {
 		err = errors.New("no data has been changed with the specified id")
@@ -113,14 +113,14 @@ func DeleteDocsByID(_id primitive.ObjectID, db *mongo.Database, col string) erro
 func SignUp(db *mongo.Database, col string, insertedDoc model.User) (insertedID primitive.ObjectID, err error) {
 	if insertedDoc.FirstName == "" || insertedDoc.LastName == "" || insertedDoc.Email == "" || insertedDoc.Password == "" {
 		return insertedID, fmt.Errorf("mohon untuk melengkapi data")
-	} 
+	}
 	if err = checkmail.ValidateFormat(insertedDoc.Email); err != nil {
 		return insertedID, fmt.Errorf("email tidak valid")
-	} 
+	}
 	userExists, _ := GetUserFromEmail(insertedDoc.Email, db, col)
 	if insertedDoc.Email == userExists.Email {
 		return insertedID, fmt.Errorf("email sudah terdaftar")
-	} 
+	}
 	if insertedDoc.Confirmpassword != insertedDoc.Password {
 		return insertedID, fmt.Errorf("konfirmasi password salah")
 	}
@@ -164,13 +164,13 @@ func GCFPostHandlerSignUp(collectionname string, r *http.Request) string {
 func LogIn(db *mongo.Database, col string, insertedDoc model.User) (email string, err error) {
 	if insertedDoc.Email == "" || insertedDoc.Password == "" {
 		return email, fmt.Errorf("mohon untuk melengkapi data")
-	} 
+	}
 	if err = checkmail.ValidateFormat(insertedDoc.Email); err != nil {
 		return email, fmt.Errorf("email tidak valid")
-	} 
+	}
 	existsDoc, err := GetUserFromEmail(insertedDoc.Email, db, col)
 	if err != nil {
-		return 
+		return
 	}
 	salt, err := hex.DecodeString(existsDoc.Salt)
 	if err != nil {
@@ -204,7 +204,7 @@ func GCFPostHandler(PASETOPRIVATEKEYENV, collectionname string, r *http.Request)
 	} else {
 		Response.Message = "Selamat Datang"
 		Response.Token = tokenstring
-	}		
+	}
 	return GCFReturnStruct(Response)
 }
 
@@ -230,5 +230,9 @@ func GCFReturnStruct(DataStuct any) string {
 	return string(jsondata)
 }
 
-// package baru
+func Table(DataStuct any) string {
+	jsondata, _ := json.Marshal(DataStuct)
+	return string(jsondata)
+}
 
+// package baru
