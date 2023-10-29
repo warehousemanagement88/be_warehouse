@@ -230,9 +230,4 @@ func GCFReturnStruct(DataStuct any) string {
 	return string(jsondata)
 }
 
-func Table(DataStuct any) string {
-	jsondata, _ := json.Marshal(DataStuct)
-	return string(jsondata)
-}
-
 // package baru
