@@ -69,18 +69,6 @@ func GetStaffFromID(_id primitive.ObjectID) (doc model.Item, err error) {
 	}
 	return doc, nil
 }
-func GetAllStaff(_id primitive.ObjectID) (doc model.Item, err error) {
-	collection := MongoConnect().Collection("item")
-	filter := bson.M{"_id": _id}
-	err = collection.FindOne(context.TODO(), filter).Decode(&doc)
-	if err != nil {
-		if errors.Is(err, mongo.ErrNoDocuments) {
-			return doc, fmt.Errorf("no data found for ID %s", _id)
-		}
-		return doc, fmt.Errorf("error retrieving data for ID %s: %s", _id, err.Error())
-	}
-	return doc, nil
-}
 
 func GetAllDocs(db *mongo.Database, col string, docs interface{}) interface{} {
 	collection := db.Collection(col)
