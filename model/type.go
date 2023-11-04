@@ -21,7 +21,7 @@ type Staff struct {
 	TanggalLahir	string             `bson:"tanggallahir,omitempty" json:"tanggallahir,omitempty"`
 	JenisKelamin  	string             `bson:"jeniskelamin,omitempty" json:"jeniskelamin,omitempty"`
 	Akun     		User			   `bson:"akun,omitempty" json:"akun,omitempty"`
-	Akunadmin     		User			   `bson:"akun,omitempty" json:"akun,omitempty"`
+	Akunadmin     		User			   `bson:"akunadmin,omitempty" json:"akunadmin,omitempty"`
 }
 
 type Item struct {
