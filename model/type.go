@@ -16,11 +16,12 @@ type User struct {
 }
 
 type Staff struct {
-	ID           	primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
-	NamaLengkap  	string             `bson:"namalengkap,omitempty" json:"namalengkap,omitempty"`
-	TanggalLahir	string             `bson:"tanggallahir,omitempty" json:"tanggallahir,omitempty"`
-	JenisKelamin  	string             `bson:"jeniskelamin,omitempty" json:"jeniskelamin,omitempty"`
-	Akun     		User			   `bson:"akun,omitempty" json:"akun,omitempty"`
+	ID           primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
+	NamaLengkap  string             `bson:"namalengkap,omitempty" json:"namalengkap,omitempty"`
+	TanggalLahir string             `bson:"tanggallahir,omitempty" json:"tanggallahir,omitempty"`
+	JenisKelamin string             `bson:"jeniskelamin,omitempty" json:"jeniskelamin,omitempty"`
+	Akun         User               `bson:"akun,omitempty" json:"akun,omitempty"`
+	Akunadmin    User               `bson:"akunadmin,omitempty" json:"akunadmin,omitempty"`
 }
 
 type Item struct {
