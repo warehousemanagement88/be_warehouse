@@ -78,18 +78,6 @@ func TestGetItemFromID(t *testing.T) {
 	}
 	fmt.Println(doc)
 }
-func TestGetStaffFromID(t *testing.T) {
-	id := "64d0b1104255ba95ba588512"
-	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		t.Fatalf("error converting id to objectID: %v", err)
-	}
-	doc, err := module.GetStaffFromID(objectId)
-	if err != nil {
-		t.Fatalf("error calling GetDocFromID: %v", err)
-	}
-	fmt.Println(doc)
-}
 
 func TestSignUp(t *testing.T) {
 	var doc model.User
