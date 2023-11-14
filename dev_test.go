@@ -182,8 +182,8 @@ func TestSignUpStaff(t *testing.T) {
 
 func TestLogIn(t *testing.T) {
 	var doc model.User
-	doc.Email = "dimas@gmail.com"
-	doc.Password = "fghjkliow"
+	doc.Email = "admin@gmail.com"
+	doc.Password = "87654321"
 	user, err := module.LogIn(db, doc)
 	if err != nil {
 		t.Errorf("Error getting document: %v", err)
