@@ -114,11 +114,10 @@ func TestInsertOneGudangC(t *testing.T) {
 	}
 }
 
-
 type Userr struct {
-	ID           	primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
-	Email  			string             `bson:"email,omitempty" json:"email,omitempty"`
-	Role     		string			   `bson:"role,omitempty" json:"role,omitempty"`
+	ID    primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
+	Email string             `bson:"email,omitempty" json:"email,omitempty"`
+	Role  string             `bson:"role,omitempty" json:"role,omitempty"`
 }
 
 func TestGetAllDoc(t *testing.T) {
@@ -171,10 +170,10 @@ func TestInsertUser(t *testing.T) {
 	} else {
 		hashedPassword := argon2.IDKey([]byte(password), salt, 1, 64*1024, 4, 32)
 		user := bson.M{
-			"email": doc.Email,
+			"email":    doc.Email,
 			"password": hex.EncodeToString(hashedPassword),
-			"salt": hex.EncodeToString(salt),
-			"role": "admin",
+			"salt":     hex.EncodeToString(salt),
+			"role":     "admin",
 		}
 		_, err = module.InsertOneDoc(db, "user", user)
 		if err != nil {
@@ -201,7 +200,7 @@ func TestGetUserByAdmin(t *testing.T) {
 				t.Errorf("Error getting document: %v", err)
 			} else {
 				datastaff.Akun = data
-				fmt.Println(datastaff) 
+				fmt.Println(datastaff)
 			}
 		}
 	}
@@ -219,7 +218,7 @@ func TestSignUpStaff(t *testing.T) {
 	if err != nil {
 		t.Errorf("Error inserting document: %v", err)
 	} else {
-	fmt.Println("Data berhasil disimpan dengan nama :", doc.NamaLengkap)
+		fmt.Println("Data berhasil disimpan dengan nama :", doc.NamaLengkap)
 	}
 }
 
@@ -257,7 +256,7 @@ func TestGeneratePrivateKeyPaseto(t *testing.T) {
 	id := "64d0b1104255ba95ba588512"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	role := "admin"
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	hasil, err := module.Encode(objectId, role, privateKey)
@@ -349,7 +348,6 @@ func TestWatoken(t *testing.T) {
 // 	}
 // }
 
-
 // test Gudang A
 func TestInsertGudangA(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
@@ -404,7 +402,7 @@ func TestUpdateGudangA(t *testing.T) {
 	datagudanga.Date = time.Now() // Inisialisasi dengan waktu saat ini
 	id := "65536f9a24e331f6ed254e56"
 	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	err = module.UpdateGudangA(objectId, payload.Id, conn, datagudanga)
@@ -424,9 +422,9 @@ func TestDeleteGudangA(t *testing.T) {
 	// if payload.Role != "mitra" {
 	// 	t.Errorf("Error role: %v", err)
 	// }
-	id := "65406377996edfaee3ed9a19"
+	id := "65536f9a24e331f6ed254e56"
 	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	err = module.DeleteGudangA(objectId, payload.Id, conn)
@@ -451,7 +449,7 @@ func TestGetGudangAFromID(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
 	id := "65406377996edfaee3ed9a19"
 	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	gudanga, err := module.GetGudangAFromID(objectId, conn)
@@ -504,7 +502,7 @@ func TestUpdateGudangB(t *testing.T) {
 	// }
 	var datagudangb model.GudangB
 	datagudangb.Brand = "Adidas"
-	datagudangb.Name = "Five Ten Kestrel Lace Mountain Bike Shoes"
+	datagudangb.Name = "Kestrel Lace Mountain Bike Shoes"
 	datagudangb.Category = "Data Science"
 	datagudangb.QTY = "25"
 	datagudangb.SKU = "BC0770 	"
@@ -514,9 +512,9 @@ func TestUpdateGudangB(t *testing.T) {
 	datagudangb.Color = "Grey"
 	datagudangb.Breadcrumbs = "Women/Shoes"
 	datagudangb.Date = time.Now() // Inisialisasi dengan waktu saat ini
-	id := "65406377996edfaee3ed9a19"
+	id := "6553820961cf28ee4d4d36c3"
 	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	err = module.UpdateGudangB(objectId, payload.Id, conn, datagudangb)
@@ -536,9 +534,9 @@ func TestDeleteGudangB(t *testing.T) {
 	// if payload.Role != "mitra" {
 	// 	t.Errorf("Error role: %v", err)
 	// }
-	id := "65406377996edfaee3ed9a19"
+	id := "6553820961cf28ee4d4d36c3"
 	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	err = module.DeleteGudangB(objectId, payload.Id, conn)
@@ -563,7 +561,7 @@ func TestGetGudangBFromID(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
 	id := "65406377996edfaee3ed9a19"
 	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	gudangb, err := module.GetGudangBFromID(objectId, conn)
@@ -616,7 +614,7 @@ func TestUpdateGudangC(t *testing.T) {
 	// }
 	var datagudangc model.GudangC
 	datagudangc.Brand = "Adidas"
-	datagudangc.Name = "Five Ten Kestrel Lace Mountain Bike Shoes"
+	datagudangc.Name = "Bike Shoes"
 	datagudangc.Category = "Data Science"
 	datagudangc.QTY = "25"
 	datagudangc.SKU = "BC0770 	"
@@ -626,9 +624,9 @@ func TestUpdateGudangC(t *testing.T) {
 	datagudangc.Color = "Grey"
 	datagudangc.Breadcrumbs = "Women/Shoes"
 	datagudangc.Date = time.Now() // Inisialisasi dengan waktu saat ini
-	id := "65406377996edfaee3ed9a19"
+	id := "65538318ad7d4fa2f42595eb"
 	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	err = module.UpdateGudangC(objectId, payload.Id, conn, datagudangc)
@@ -650,7 +648,7 @@ func TestDeleteGudangC(t *testing.T) {
 	// }
 	id := "65538318ad7d4fa2f42595eb"
 	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	err = module.DeleteGudangC(objectId, payload.Id, conn)
@@ -675,7 +673,7 @@ func TestGetGudangCFromID(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
 	id := "65406377996edfaee3ed9a19"
 	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil{
+	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
 	gudangc, err := module.GetGudangCFromID(objectId, conn)
@@ -686,16 +684,16 @@ func TestGetGudangCFromID(t *testing.T) {
 	}
 }
 
-func TestReturnStruct(t *testing.T){
+func TestReturnStruct(t *testing.T) {
 	// var user model.User
 	// user.Email = "fatwa"
 	id := "65473763d04dda3a8502b58f"
 	objectId, _ := primitive.ObjectIDFromHex(id)
 	user, _ := module.GetUserFromID(objectId, db)
-	data := model.User{ 
-		ID : user.ID,
+	data := model.User{
+		ID:    user.ID,
 		Email: user.Email,
-		Role : user.Role,
+		Role:  user.Role,
 	}
 	hasil := module.GCFReturnStruct(data)
 	fmt.Println(hasil)
