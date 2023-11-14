@@ -68,20 +68,20 @@ type GudangC struct {
 	Date          time.Time          `bson:"date,omitempty" json:"date,omitempty"`
 }
 
-type GudangD struct {
-	ID            primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
-	Brand         string             `bson:"brand,omitempty" json:"brand,omitempty"`
-	Name          string             `bson:"name,omitempty" json:"name,omitempty"`
-	Category      string             `bson:"category,omitempty" json:"category,omitempty"`
-	QTY           string             `bson:"qty,omitempty" json:"qty,omitempty"`
-	SKU           string             `bson:"sku,omitempty" json:"sku,omitempty"`
-	SellingPrice  string             `bson:"sellingprice,omitempty" json:"sellingprice,omitempty"`
-	OriginalPrice string             `bson:"originalprice,omitempty" json:"originalprice,omitempty"`
-	Availability  string             `bson:"availability,omitempty" json:"availability,omitempty"`
-	Color         string             `bson:"color,omitempty" json:"color,omitempty"`
-	Breadcrumbs   string             `bson:"breadcrumbs,omitempty" json:"breadcrumbs,omitempty"`
-	Date          time.Time          `bson:"date,omitempty" json:"date,omitempty"`
-}
+// type GudangD struct {
+// 	ID            primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
+// 	Brand         string             `bson:"brand,omitempty" json:"brand,omitempty"`
+// 	Name          string             `bson:"name,omitempty" json:"name,omitempty"`
+// 	Category      string             `bson:"category,omitempty" json:"category,omitempty"`
+// 	QTY           string             `bson:"qty,omitempty" json:"qty,omitempty"`
+// 	SKU           string             `bson:"sku,omitempty" json:"sku,omitempty"`
+// 	SellingPrice  string             `bson:"sellingprice,omitempty" json:"sellingprice,omitempty"`
+// 	OriginalPrice string             `bson:"originalprice,omitempty" json:"originalprice,omitempty"`
+// 	Availability  string             `bson:"availability,omitempty" json:"availability,omitempty"`
+// 	Color         string             `bson:"color,omitempty" json:"color,omitempty"`
+// 	Breadcrumbs   string             `bson:"breadcrumbs,omitempty" json:"breadcrumbs,omitempty"`
+// 	Date          time.Time          `bson:"date,omitempty" json:"date,omitempty"`
+// }
 
 // type GudangE struct {
 // 	ID            primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
