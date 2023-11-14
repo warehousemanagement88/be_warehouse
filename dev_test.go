@@ -651,7 +651,7 @@ func TestDeleteGudangC(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
 	}
-	err = module.DeleteGudangC(objectId, payload.Id, conn)
+	err = module.DeleteGudangB(objectId, payload.Id, conn)
 	if err != nil {
 		t.Errorf("Error delete : %v", err)
 	} else {
