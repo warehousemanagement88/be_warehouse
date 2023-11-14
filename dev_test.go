@@ -614,7 +614,7 @@ func TestUpdateGudangC(t *testing.T) {
 	// }
 	var datagudangc model.GudangC
 	datagudangc.Brand = "Adidas"
-	datagudangc.Name = "Five Ten Kestrel Lace Mountain Bike Shoes"
+	datagudangc.Name = "Bike Shoes"
 	datagudangc.Category = "Data Science"
 	datagudangc.QTY = "25"
 	datagudangc.SKU = "BC0770 	"
@@ -624,7 +624,7 @@ func TestUpdateGudangC(t *testing.T) {
 	datagudangc.Color = "Grey"
 	datagudangc.Breadcrumbs = "Women/Shoes"
 	datagudangc.Date = time.Now() // Inisialisasi dengan waktu saat ini
-	id := "65406377996edfaee3ed9a19"
+	id := "65538318ad7d4fa2f42595eb"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -646,7 +646,7 @@ func TestDeleteGudangC(t *testing.T) {
 	// if payload.Role != "mitra" {
 	// 	t.Errorf("Error role: %v", err)
 	// }
-	id := "65406377996edfaee3ed9a19"
+	id := "65538318ad7d4fa2f42595eb"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
