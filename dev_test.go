@@ -624,7 +624,7 @@ func TestUpdateGudangC(t *testing.T) {
 	datagudangc.Color = "Grey"
 	datagudangc.Breadcrumbs = "Women/Shoes"
 	datagudangc.Date = time.Now() // Inisialisasi dengan waktu saat ini
-	id := "6553864b088595d01c4bb4af"
+	id := "65606ebd68786ca8dbfae848"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -646,7 +646,7 @@ func TestDeleteGudangC(t *testing.T) {
 	// if payload.Role != "mitra" {
 	// 	t.Errorf("Error role: %v", err)
 	// }
-	id := "6553864b088595d01c4bb4af"
+	id := "65606ebd68786ca8dbfae848"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
