@@ -646,7 +646,7 @@ func TestDeleteGudangC(t *testing.T) {
 	// if payload.Role != "mitra" {
 	// 	t.Errorf("Error role: %v", err)
 	// }
-	id := "656097d0606447c227ba23ca"
+	id := "65538318ad7d4fa2f42595eb"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
