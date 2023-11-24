@@ -571,7 +571,7 @@ func UpdateGudangC(idparam, iduser primitive.ObjectID, db *mongo.Database, inser
 
 // delete gudang c
 func DeleteGudangC(idparam, iduser primitive.ObjectID, db *mongo.Database) error {
-	_, err := GetGudangBFromID(idparam, db)
+	_, err := GetGudangCFromID(idparam, db)
 	if err != nil {
 		return err
 	}
