@@ -65,6 +65,51 @@ func UpdateOneDoc(id primitive.ObjectID, db *mongo.Database, col string, doc int
 	return nil
 }
 
+// update password
+func UpdatePasswordUser(iduser primitive.ObjectID, db *mongo.Database, insertedDoc model.Password) error {
+	dataUser, err := GetUserFromID(iduser, db)
+	if err != nil {
+		return err
+	}
+	salt, err := hex.DecodeString(dataUser.Salt)
+	if err != nil {
+		return fmt.Errorf("kesalahan server : salt")
+	}
+	hash := argon2.IDKey([]byte(insertedDoc.Password), salt, 1, 64*1024, 4, 32)
+	if hex.EncodeToString(hash) != dataUser.Password {
+		return fmt.Errorf("password lama salah")
+	}
+	if insertedDoc.Newpassword == "" || insertedDoc.Confirmpassword == "" {
+		return fmt.Errorf("mohon untuk melengkapi data")
+	}
+	if insertedDoc.Confirmpassword != insertedDoc.Newpassword {
+		return fmt.Errorf("konfirmasi password salah")
+	}
+	if strings.Contains(insertedDoc.Newpassword, " ") {
+		return fmt.Errorf("password tidak boleh mengandung spasi")
+	}
+	if len(insertedDoc.Newpassword) < 8 {
+		return fmt.Errorf("password terlalu pendek")
+	}
+	salt = make([]byte, 16)
+	_, err = rand.Read(salt)
+	if err != nil {
+		return fmt.Errorf("kesalahan server : salt")
+	}
+	hashedPassword := argon2.IDKey([]byte(insertedDoc.Newpassword), salt, 1, 64*1024, 4, 32)
+	user := bson.M{
+		"email":    dataUser.Email,
+		"password": hex.EncodeToString(hashedPassword),
+		"salt":     hex.EncodeToString(salt),
+		"role":     dataUser.Role,
+	}
+	err = UpdateOneDoc(iduser, db, "user", user)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
 func DeleteOneDoc(_id primitive.ObjectID, db *mongo.Database, col string) error {
 	collection := db.Collection(col)
 	filter := bson.M{"_id": _id}
@@ -156,6 +201,15 @@ func LogIn(db *mongo.Database, insertedDoc model.User) (user model.User, err err
 	}
 	return existsDoc, nil
 }
+
+// func GetUserLogin(PASETOPUBLICKEYENV string, r *http.Request) (Payload, error) {
+// 	tokenstring := r.Header.Get("Authorization")
+// 	payload, err := Decode(os.Getenv(PASETOPUBLICKEYENV), tokenstring)
+// 	if err != nil {
+// 		return payload, err
+// 	}
+// 	return payload, nil
+// }
 
 //user
 func UpdateUser(iduser primitive.ObjectID, db *mongo.Database, insertedDoc model.User) error {

@@ -172,6 +172,37 @@ func GCFHandlerGetUserFromID(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname stri
 	return GCFReturnStruct(data)
 }
 
+// password 
+// var (
+// 	Response model.Response
+// 	password model.Password
+// )
+
+// func Put(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
+// 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
+// 	Response.Status = false
+// 	//
+// 	user_login, err := GetUserLogin(PASETOPUBLICKEYENV, r)
+// 	if err != nil {
+// 			Response.Message = "Failed to decode token: " + err.Error()
+// 			return GCFReturnStruct(Response)
+// 	}
+// 	err = json.NewDecoder(r.Body).Decode(&password)
+// 	if err != nil {
+// 		Response.Message = "error parsing application/json: " + err.Error()
+// 		return GCFReturnStruct(Response)
+// 	}
+// 	err = UpdatePasswordUser(user_login.Id, conn, password)
+// 	if err != nil {
+// 		Response.Message = err.Error()
+// 		return GCFReturnStruct(Response)
+// 	}
+// 	//
+// 	Response.Status = true
+// 	Response.Message = "Berhasil Update Password"
+// 	return GCFReturnStruct(Response)
+// }
+
 // staff
 func GCFHandlerUpdateStaff(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
