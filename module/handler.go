@@ -183,7 +183,7 @@ func GCFHandlerUpdateStaff(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string
 		Response.Message = "Gagal Decode Token : " + err.Error()
 		return GCFReturnStruct(Response)
 	}
-	if payload.Role != "staff" {
+	if payload.Role != "admin" {
 		Response.Message = "Anda tidak memiliki akses"
 		return GCFReturnStruct(Response)
 	}
@@ -235,8 +235,8 @@ func GCFHandlerGetStaffFromID(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname str
 		Response.Message = err.Error()
 		return GCFReturnStruct(Response)
 	}
-	if payload.Role != "staff" {
-		Response.Message = "Anda bukan staff"
+	if payload.Role != "admin" {
+		Response.Message = "Anda bukan admin"
 		return GCFReturnStruct(Response)
 	}
 	data, err := GetStaffFromAkun(payload.Id, conn)

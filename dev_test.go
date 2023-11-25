@@ -98,7 +98,29 @@ func TestInsertUser(t *testing.T) {
 }
 
 func TestGetUserByAdmin(t *testing.T) {
-	id := "65473763d04dda3a8502b58f"
+	id := "65536731f648824bd5b661c8"
+	idparam, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		t.Errorf("Error converting id to objectID: %v", err)
+	}
+	data, err := module.GetUserFromID(idparam, db)
+	if err != nil {
+		t.Errorf("Error getting document: %v", err)
+	} else {
+		if data.Role == "staff" {
+			datastaff, err := module.GetStaffFromAkun(data.ID, db)
+			if err != nil {
+				t.Errorf("Error getting document: %v", err)
+			} else {
+				datastaff.Akun = data
+				fmt.Println(datastaff)
+			}
+		}
+	}
+}
+
+func TestGetStaffFromID(t *testing.T) {
+	id := "6561c406c29516c213410cb3"
 	idparam, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Errorf("Error converting id to objectID: %v", err)
