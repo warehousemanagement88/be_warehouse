@@ -27,93 +27,6 @@ func TestGetUserFromEmail(t *testing.T) {
 	}
 }
 
-func TestInsertOneGudangA(t *testing.T) {
-	var doc model.GudangA
-	doc.Brand = "Adidas"
-	doc.Name = "Beach Shorts"
-	doc.Category = "Clothing"
-	doc.QTY = "100"
-	doc.SKU = "FJ5089"
-	doc.SellingPrice = "675.000"
-	doc.OriginalPrice = "592.000"
-	doc.Availability = "InStock"
-	doc.Color = "Black"
-	doc.Breadcrumbs = "Women/Clothing"
-	doc.Date = time.Now() // Inisialisasi dengan waktu saat ini
-
-	if doc.Brand == "" || doc.Name == "" || doc.Category == "" || doc.QTY == "" ||
-		doc.SKU == "" || doc.SellingPrice == "" || doc.OriginalPrice == "" ||
-		doc.Availability == "" || doc.Color == "" || doc.Breadcrumbs == "" || doc.Date.IsZero() {
-		t.Errorf("Mohon untuk melengkapi data")
-	} else {
-		insertedID, err := module.InsertOneDoc(db, "gudanga", doc)
-		if err != nil {
-			t.Errorf("Error inserting document: %v", err)
-			fmt.Println("Data tidak berhasil disimpan")
-		} else {
-			fmt.Println("Data berhasil disimpan dengan id :", insertedID.Hex())
-		}
-	}
-}
-
-func TestInsertOneGudangB(t *testing.T) {
-	var doc model.GudangB
-	doc.Brand = "Adidas"
-	doc.Name = "Beach Shorts"
-	doc.Category = "Clothing"
-	doc.QTY = "100"
-	doc.SKU = "FJ5089"
-	doc.SellingPrice = "675.000"
-	doc.OriginalPrice = "592.000"
-	doc.Availability = "InStock"
-	doc.Color = "Black"
-	doc.Breadcrumbs = "Women/Clothing"
-	doc.Date = time.Now() // Inisialisasi dengan waktu saat ini
-
-	if doc.Brand == "" || doc.Name == "" || doc.Category == "" || doc.QTY == "" ||
-		doc.SKU == "" || doc.SellingPrice == "" || doc.OriginalPrice == "" ||
-		doc.Availability == "" || doc.Color == "" || doc.Breadcrumbs == "" || doc.Date.IsZero() {
-		t.Errorf("Mohon untuk melengkapi data")
-	} else {
-		insertedID, err := module.InsertOneDoc(db, "gudangb", doc)
-		if err != nil {
-			t.Errorf("Error inserting document: %v", err)
-			fmt.Println("Data tidak berhasil disimpan")
-		} else {
-			fmt.Println("Data berhasil disimpan dengan id :", insertedID.Hex())
-		}
-	}
-}
-
-func TestInsertOneGudangC(t *testing.T) {
-	var doc model.GudangC
-	doc.Brand = "Adidas"
-	doc.Name = "Beach Shorts"
-	doc.Category = "Clothing"
-	doc.QTY = "100"
-	doc.SKU = "FJ5089"
-	doc.SellingPrice = "675.000"
-	doc.OriginalPrice = "592.000"
-	doc.Availability = "InStock"
-	doc.Color = "Black"
-	doc.Breadcrumbs = "Women/Clothing"
-	doc.Date = time.Now() // Inisialisasi dengan waktu saat ini
-
-	if doc.Brand == "" || doc.Name == "" || doc.Category == "" || doc.QTY == "" ||
-		doc.SKU == "" || doc.SellingPrice == "" || doc.OriginalPrice == "" ||
-		doc.Availability == "" || doc.Color == "" || doc.Breadcrumbs == "" || doc.Date.IsZero() {
-		t.Errorf("Mohon untuk melengkapi data")
-	} else {
-		insertedID, err := module.InsertOneDoc(db, "gudangc", doc)
-		if err != nil {
-			t.Errorf("Error inserting document: %v", err)
-			fmt.Println("Data tidak berhasil disimpan")
-		} else {
-			fmt.Println("Data berhasil disimpan dengan id :", insertedID.Hex())
-		}
-	}
-}
-
 type Userr struct {
 	ID    primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
 	Email string             `bson:"email,omitempty" json:"email,omitempty"`
@@ -253,7 +166,7 @@ func TestGeneratePrivateKeyPaseto(t *testing.T) {
 	privateKey, publicKey := module.GenerateKey()
 	fmt.Println("ini private key :", privateKey)
 	fmt.Println("ini public key :", publicKey)
-	id := "64d0b1104255ba95ba588512"
+	id := "65536731f648824bd5b661c8"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	role := "admin"
 	if err != nil {
@@ -351,7 +264,7 @@ func TestWatoken(t *testing.T) {
 // test Gudang A
 func TestInsertGudangA(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTE0VDE2OjE5OjQ3WiIsImlhdCI6IjIwMjMtMTEtMTRUMTQ6MTk6NDdaIiwiaWQiOiJhZG1pbkBnbWFpbC5jb20iLCJuYmYiOiIyMDIzLTExLTE0VDE0OjE5OjQ3WiJ9zre7vt2Hi4uQG1VsmZOOY_PP-FzT81vhh1FTK2rkqFPJc7iKkFmWN5QzYbPSQfYmqfVllzTDnphqdYgQTgz3CA")
+	payload, err := module.Decode("d43b6164bd8c86becc485d8949a2a5ed4d85e89a597fc10051982278eff5e66f", "v4.public.eyJleHAiOiIyMDIzLTExLTI1VDE3OjM3OjAzKzA3OjAwIiwiaWF0IjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsImlkIjoiNjU1MzY3MzFmNjQ4ODI0YmQ1YjY2MWM4IiwibmJmIjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsInJvbGUiOiJhZG1pbiJ9gR2iOcE5YrySBvqBtjza5Cm_dIVmAE6JzYTDsJP4nw_w9ygNQ_U1JyYGNEs0WR6P89DeEpFyVZAYTwREKIvYCA")
 	if err != nil {
 		t.Errorf("Error decode token: %v", err)
 	}
@@ -380,7 +293,7 @@ func TestInsertGudangA(t *testing.T) {
 
 func TestUpdateGudangA(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTAxVDA2OjQ5OjQ0WiIsImlhdCI6IjIwMjMtMTEtMDFUMDQ6NDk6NDRaIiwiaWQiOiI2NTQwNjMyODI4NzY0ZDk2YzY0OWYyOWQiLCJuYmYiOiIyMDIzLTExLTAxVDA0OjQ5OjQ0WiJ92RxBGslXaHBoLQhvMJLQO7uEBG5c5FmkpZgakPjmk1aUFDdRkw3m3r-7BpkhDmCtByoARDr36X3DhjCL8HT8AQ")
+	payload, err := module.Decode("d43b6164bd8c86becc485d8949a2a5ed4d85e89a597fc10051982278eff5e66f", "v4.public.eyJleHAiOiIyMDIzLTExLTI1VDE3OjM3OjAzKzA3OjAwIiwiaWF0IjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsImlkIjoiNjU1MzY3MzFmNjQ4ODI0YmQ1YjY2MWM4IiwibmJmIjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsInJvbGUiOiJhZG1pbiJ9gR2iOcE5YrySBvqBtjza5Cm_dIVmAE6JzYTDsJP4nw_w9ygNQ_U1JyYGNEs0WR6P89DeEpFyVZAYTwREKIvYCA")
 	// payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTAxVDA2OjQ3OjMxWiIsImlhdCI6IjIwMjMtMTEtMDFUMDQ6NDc6MzFaIiwiaWQiOiI2NTNkZTllYjg5MzlmYjNjZjI3ZjZkMzciLCJuYmYiOiIyMDIzLTExLTAxVDA0OjQ3OjMxWiJ92YbTLQWznLupbH0Syb6GPKkj4ZW_JJLveVcFTfZElv8_jybZCMBnw8y-7SLZVMpRTq56PaArdEBwlvvSPQjtCg")
 	if err != nil {
 		t.Errorf("Error decode token: %v", err)
@@ -389,7 +302,7 @@ func TestUpdateGudangA(t *testing.T) {
 	// 	t.Errorf("Error role: %v", err)
 	// }
 	var datagudanga model.GudangA
-	datagudanga.Brand = "Adidas"
+	datagudanga.Brand = "Adidas1"
 	datagudanga.Name = "Five Ten Kestrel Lace Mountain Bike Shoes"
 	datagudanga.Category = "Data Science"
 	datagudanga.QTY = "25"
@@ -400,7 +313,7 @@ func TestUpdateGudangA(t *testing.T) {
 	datagudanga.Color = "Grey"
 	datagudanga.Breadcrumbs = "Women/Shoes"
 	datagudanga.Date = time.Now() // Inisialisasi dengan waktu saat ini
-	id := "65536f9a24e331f6ed254e56"
+	id := "6561b5eb4390db31095e1c16"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -415,14 +328,14 @@ func TestUpdateGudangA(t *testing.T) {
 
 func TestDeleteGudangA(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTAxVDA2OjQ5OjQ0WiIsImlhdCI6IjIwMjMtMTEtMDFUMDQ6NDk6NDRaIiwiaWQiOiI2NTQwNjMyODI4NzY0ZDk2YzY0OWYyOWQiLCJuYmYiOiIyMDIzLTExLTAxVDA0OjQ5OjQ0WiJ92RxBGslXaHBoLQhvMJLQO7uEBG5c5FmkpZgakPjmk1aUFDdRkw3m3r-7BpkhDmCtByoARDr36X3DhjCL8HT8AQ")
+	payload, err := module.Decode("d43b6164bd8c86becc485d8949a2a5ed4d85e89a597fc10051982278eff5e66f", "v4.public.eyJleHAiOiIyMDIzLTExLTI1VDE3OjM3OjAzKzA3OjAwIiwiaWF0IjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsImlkIjoiNjU1MzY3MzFmNjQ4ODI0YmQ1YjY2MWM4IiwibmJmIjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsInJvbGUiOiJhZG1pbiJ9gR2iOcE5YrySBvqBtjza5Cm_dIVmAE6JzYTDsJP4nw_w9ygNQ_U1JyYGNEs0WR6P89DeEpFyVZAYTwREKIvYCA")
 	if err != nil {
 		t.Errorf("Error decode token: %v", err)
 	}
 	// if payload.Role != "mitra" {
 	// 	t.Errorf("Error role: %v", err)
 	// }
-	id := "65536f9a24e331f6ed254e56"
+	id := "6561b5eb4390db31095e1c16"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -447,7 +360,7 @@ func TestGetAllGudangA(t *testing.T) {
 
 func TestGetGudangAFromID(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	id := "65406377996edfaee3ed9a19"
+	id := "6561b5eb4390db31095e1c16"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -463,7 +376,7 @@ func TestGetGudangAFromID(t *testing.T) {
 // test Gudang B
 func TestInsertGudangB(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTE0VDE2OjE5OjQ3WiIsImlhdCI6IjIwMjMtMTEtMTRUMTQ6MTk6NDdaIiwiaWQiOiJhZG1pbkBnbWFpbC5jb20iLCJuYmYiOiIyMDIzLTExLTE0VDE0OjE5OjQ3WiJ9zre7vt2Hi4uQG1VsmZOOY_PP-FzT81vhh1FTK2rkqFPJc7iKkFmWN5QzYbPSQfYmqfVllzTDnphqdYgQTgz3CA")
+	payload, err := module.Decode("d43b6164bd8c86becc485d8949a2a5ed4d85e89a597fc10051982278eff5e66f", "v4.public.eyJleHAiOiIyMDIzLTExLTI1VDE3OjM3OjAzKzA3OjAwIiwiaWF0IjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsImlkIjoiNjU1MzY3MzFmNjQ4ODI0YmQ1YjY2MWM4IiwibmJmIjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsInJvbGUiOiJhZG1pbiJ9gR2iOcE5YrySBvqBtjza5Cm_dIVmAE6JzYTDsJP4nw_w9ygNQ_U1JyYGNEs0WR6P89DeEpFyVZAYTwREKIvYCA")
 	if err != nil {
 		t.Errorf("Error decode token: %v", err)
 	}
@@ -492,7 +405,7 @@ func TestInsertGudangB(t *testing.T) {
 
 func TestUpdateGudangB(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTAxVDA2OjQ5OjQ0WiIsImlhdCI6IjIwMjMtMTEtMDFUMDQ6NDk6NDRaIiwiaWQiOiI2NTQwNjMyODI4NzY0ZDk2YzY0OWYyOWQiLCJuYmYiOiIyMDIzLTExLTAxVDA0OjQ5OjQ0WiJ92RxBGslXaHBoLQhvMJLQO7uEBG5c5FmkpZgakPjmk1aUFDdRkw3m3r-7BpkhDmCtByoARDr36X3DhjCL8HT8AQ")
+	payload, err := module.Decode("d43b6164bd8c86becc485d8949a2a5ed4d85e89a597fc10051982278eff5e66f", "v4.public.eyJleHAiOiIyMDIzLTExLTI1VDE3OjM3OjAzKzA3OjAwIiwiaWF0IjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsImlkIjoiNjU1MzY3MzFmNjQ4ODI0YmQ1YjY2MWM4IiwibmJmIjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsInJvbGUiOiJhZG1pbiJ9gR2iOcE5YrySBvqBtjza5Cm_dIVmAE6JzYTDsJP4nw_w9ygNQ_U1JyYGNEs0WR6P89DeEpFyVZAYTwREKIvYCA")
 	// payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTAxVDA2OjQ3OjMxWiIsImlhdCI6IjIwMjMtMTEtMDFUMDQ6NDc6MzFaIiwiaWQiOiI2NTNkZTllYjg5MzlmYjNjZjI3ZjZkMzciLCJuYmYiOiIyMDIzLTExLTAxVDA0OjQ3OjMxWiJ92YbTLQWznLupbH0Syb6GPKkj4ZW_JJLveVcFTfZElv8_jybZCMBnw8y-7SLZVMpRTq56PaArdEBwlvvSPQjtCg")
 	if err != nil {
 		t.Errorf("Error decode token: %v", err)
@@ -501,7 +414,7 @@ func TestUpdateGudangB(t *testing.T) {
 	// 	t.Errorf("Error role: %v", err)
 	// }
 	var datagudangb model.GudangB
-	datagudangb.Brand = "Adidas"
+	datagudangb.Brand = "Adidas2"
 	datagudangb.Name = "Kestrel Lace Mountain Bike Shoes"
 	datagudangb.Category = "Data Science"
 	datagudangb.QTY = "25"
@@ -512,7 +425,7 @@ func TestUpdateGudangB(t *testing.T) {
 	datagudangb.Color = "Grey"
 	datagudangb.Breadcrumbs = "Women/Shoes"
 	datagudangb.Date = time.Now() // Inisialisasi dengan waktu saat ini
-	id := "6553820961cf28ee4d4d36c3"
+	id := "6561b73e8578b8f5ceb7dedb"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -527,14 +440,14 @@ func TestUpdateGudangB(t *testing.T) {
 
 func TestDeleteGudangB(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTAxVDA2OjQ5OjQ0WiIsImlhdCI6IjIwMjMtMTEtMDFUMDQ6NDk6NDRaIiwiaWQiOiI2NTQwNjMyODI4NzY0ZDk2YzY0OWYyOWQiLCJuYmYiOiIyMDIzLTExLTAxVDA0OjQ5OjQ0WiJ92RxBGslXaHBoLQhvMJLQO7uEBG5c5FmkpZgakPjmk1aUFDdRkw3m3r-7BpkhDmCtByoARDr36X3DhjCL8HT8AQ")
+	payload, err := module.Decode("d43b6164bd8c86becc485d8949a2a5ed4d85e89a597fc10051982278eff5e66f", "v4.public.eyJleHAiOiIyMDIzLTExLTI1VDE3OjM3OjAzKzA3OjAwIiwiaWF0IjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsImlkIjoiNjU1MzY3MzFmNjQ4ODI0YmQ1YjY2MWM4IiwibmJmIjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsInJvbGUiOiJhZG1pbiJ9gR2iOcE5YrySBvqBtjza5Cm_dIVmAE6JzYTDsJP4nw_w9ygNQ_U1JyYGNEs0WR6P89DeEpFyVZAYTwREKIvYCA")
 	if err != nil {
 		t.Errorf("Error decode token: %v", err)
 	}
 	// if payload.Role != "mitra" {
 	// 	t.Errorf("Error role: %v", err)
 	// }
-	id := "6553820961cf28ee4d4d36c3"
+	id := "6561b73e8578b8f5ceb7dedb"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -559,7 +472,7 @@ func TestGetAllGudangB(t *testing.T) {
 
 func TestGetGudangBFromID(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	id := "65406377996edfaee3ed9a19"
+	id := "6561b73e8578b8f5ceb7dedb"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -575,7 +488,7 @@ func TestGetGudangBFromID(t *testing.T) {
 // test Gudang C
 func TestInsertGudangC(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTE0VDE2OjE5OjQ3WiIsImlhdCI6IjIwMjMtMTEtMTRUMTQ6MTk6NDdaIiwiaWQiOiJhZG1pbkBnbWFpbC5jb20iLCJuYmYiOiIyMDIzLTExLTE0VDE0OjE5OjQ3WiJ9zre7vt2Hi4uQG1VsmZOOY_PP-FzT81vhh1FTK2rkqFPJc7iKkFmWN5QzYbPSQfYmqfVllzTDnphqdYgQTgz3CA")
+	payload, err := module.Decode("d43b6164bd8c86becc485d8949a2a5ed4d85e89a597fc10051982278eff5e66f", "v4.public.eyJleHAiOiIyMDIzLTExLTI1VDE3OjM3OjAzKzA3OjAwIiwiaWF0IjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsImlkIjoiNjU1MzY3MzFmNjQ4ODI0YmQ1YjY2MWM4IiwibmJmIjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsInJvbGUiOiJhZG1pbiJ9gR2iOcE5YrySBvqBtjza5Cm_dIVmAE6JzYTDsJP4nw_w9ygNQ_U1JyYGNEs0WR6P89DeEpFyVZAYTwREKIvYCA")
 	if err != nil {
 		t.Errorf("Error decode token: %v", err)
 	}
@@ -604,7 +517,7 @@ func TestInsertGudangC(t *testing.T) {
 
 func TestUpdateGudangC(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTAxVDA2OjQ5OjQ0WiIsImlhdCI6IjIwMjMtMTEtMDFUMDQ6NDk6NDRaIiwiaWQiOiI2NTQwNjMyODI4NzY0ZDk2YzY0OWYyOWQiLCJuYmYiOiIyMDIzLTExLTAxVDA0OjQ5OjQ0WiJ92RxBGslXaHBoLQhvMJLQO7uEBG5c5FmkpZgakPjmk1aUFDdRkw3m3r-7BpkhDmCtByoARDr36X3DhjCL8HT8AQ")
+	payload, err := module.Decode("d43b6164bd8c86becc485d8949a2a5ed4d85e89a597fc10051982278eff5e66f", "v4.public.eyJleHAiOiIyMDIzLTExLTI1VDE3OjM3OjAzKzA3OjAwIiwiaWF0IjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsImlkIjoiNjU1MzY3MzFmNjQ4ODI0YmQ1YjY2MWM4IiwibmJmIjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsInJvbGUiOiJhZG1pbiJ9gR2iOcE5YrySBvqBtjza5Cm_dIVmAE6JzYTDsJP4nw_w9ygNQ_U1JyYGNEs0WR6P89DeEpFyVZAYTwREKIvYCA")
 	// payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTAxVDA2OjQ3OjMxWiIsImlhdCI6IjIwMjMtMTEtMDFUMDQ6NDc6MzFaIiwiaWQiOiI2NTNkZTllYjg5MzlmYjNjZjI3ZjZkMzciLCJuYmYiOiIyMDIzLTExLTAxVDA0OjQ3OjMxWiJ92YbTLQWznLupbH0Syb6GPKkj4ZW_JJLveVcFTfZElv8_jybZCMBnw8y-7SLZVMpRTq56PaArdEBwlvvSPQjtCg")
 	if err != nil {
 		t.Errorf("Error decode token: %v", err)
@@ -613,7 +526,7 @@ func TestUpdateGudangC(t *testing.T) {
 	// 	t.Errorf("Error role: %v", err)
 	// }
 	var datagudangc model.GudangC
-	datagudangc.Brand = "Adidas"
+	datagudangc.Brand = "Adidas3"
 	datagudangc.Name = "Bike Shoes"
 	datagudangc.Category = "Data Science"
 	datagudangc.QTY = "25"
@@ -624,7 +537,7 @@ func TestUpdateGudangC(t *testing.T) {
 	datagudangc.Color = "Grey"
 	datagudangc.Breadcrumbs = "Women/Shoes"
 	datagudangc.Date = time.Now() // Inisialisasi dengan waktu saat ini
-	id := "65606ebd68786ca8dbfae848"
+	id := "6561b7f8cef2ca5a0ca3ea17"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -639,14 +552,14 @@ func TestUpdateGudangC(t *testing.T) {
 
 func TestDeleteGudangC(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	payload, err := module.Decode("5c633cfc6243cec8c9b5dae4a8aae7b366126ad04ee4e5a90c7596e7f8b9a9d8", "v4.public.eyJleHAiOiIyMDIzLTExLTAxVDA2OjQ5OjQ0WiIsImlhdCI6IjIwMjMtMTEtMDFUMDQ6NDk6NDRaIiwiaWQiOiI2NTQwNjMyODI4NzY0ZDk2YzY0OWYyOWQiLCJuYmYiOiIyMDIzLTExLTAxVDA0OjQ5OjQ0WiJ92RxBGslXaHBoLQhvMJLQO7uEBG5c5FmkpZgakPjmk1aUFDdRkw3m3r-7BpkhDmCtByoARDr36X3DhjCL8HT8AQ")
+	payload, err := module.Decode("d43b6164bd8c86becc485d8949a2a5ed4d85e89a597fc10051982278eff5e66f", "v4.public.eyJleHAiOiIyMDIzLTExLTI1VDE3OjM3OjAzKzA3OjAwIiwiaWF0IjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsImlkIjoiNjU1MzY3MzFmNjQ4ODI0YmQ1YjY2MWM4IiwibmJmIjoiMjAyMy0xMS0yNVQxNTozNzowMyswNzowMCIsInJvbGUiOiJhZG1pbiJ9gR2iOcE5YrySBvqBtjza5Cm_dIVmAE6JzYTDsJP4nw_w9ygNQ_U1JyYGNEs0WR6P89DeEpFyVZAYTwREKIvYCA")
 	if err != nil {
 		t.Errorf("Error decode token: %v", err)
 	}
 	// if payload.Role != "mitra" {
 	// 	t.Errorf("Error role: %v", err)
 	// }
-	id := "65538318ad7d4fa2f42595eb"
+	id := "6561b7f8cef2ca5a0ca3ea17"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -671,7 +584,7 @@ func TestGetAllGudangC(t *testing.T) {
 
 func TestGetGudangCFromID(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
-	id := "65406377996edfaee3ed9a19"
+	id := "6561b7f8cef2ca5a0ca3ea17"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
 		t.Fatalf("error converting id to objectID: %v", err)
@@ -686,7 +599,7 @@ func TestGetGudangCFromID(t *testing.T) {
 
 func TestReturnStruct(t *testing.T) {
 	// var user model.User
-	// user.Email = "fatwa"
+	// user.Email = "agitanovi"
 	id := "65473763d04dda3a8502b58f"
 	objectId, _ := primitive.ObjectIDFromHex(id)
 	user, _ := module.GetUserFromID(objectId, db)

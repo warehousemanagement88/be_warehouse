@@ -317,23 +317,34 @@ func InsertGudangA(_id primitive.ObjectID, db *mongo.Database, insertedDoc model
 	insertedDoc.Date.IsZero() {
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
-	gudanga := bson.M{
-		"brand": insertedDoc.Brand,
-		"name": insertedDoc.Name,
-		"category": insertedDoc.Category,
-		"qty": insertedDoc.QTY,
-		"sku": insertedDoc.SKU,
-		"sellingprice": insertedDoc.SellingPrice,
-		"originalprice": insertedDoc.OriginalPrice,
-		"breadcrumbs": insertedDoc.Breadcrumbs,
-		"date": insertedDoc.Date,
-	}
-	_, err := InsertOneDoc(db, "gudanga", gudanga)
+	// gudanga := bson.M{
+	// 	"brand": insertedDoc.Brand,
+	// 	"name": insertedDoc.Name,
+	// 	"category": insertedDoc.Category,
+	// 	"qty": insertedDoc.QTY,
+	// 	"sku": insertedDoc.SKU,
+	// 	"sellingprice": insertedDoc.SellingPrice,
+	// 	"originalprice": insertedDoc.OriginalPrice,
+	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
+	// 	"date": insertedDoc.Date,
+	// }
+	_, err := InsertOneDoc(db, "gudanga", insertedDoc)
 	if err != nil {
-		return err
+		fmt.Printf("InsertGudangA: %v\n", err)
 	}
 	return nil
 }
+
+// func InsertTodo(db *mongo.Database, col string, todo model.Todo) (insertedID primitive.ObjectID, err error) {
+// 	todo.TimeStamp.CreatedAt = time.Now()
+// 	todo.TimeStamp.UpdatedAt = time.Now()
+
+// 	insertedID, err = InsertOneDoc(db, col, todo)
+// 	if err != nil {
+// 		fmt.Printf("InsertTodo: %v\n", err)
+// 	}
+// 	return insertedID, nil
+// }
 
 // update gudang a
 func UpdateGudangA(idparam, iduser primitive.ObjectID, db *mongo.Database, insertedDoc model.GudangA) error {
@@ -379,6 +390,20 @@ func DeleteGudangA(idparam, iduser primitive.ObjectID, db *mongo.Database) error
 	}
 	return nil
 }
+
+// func DeleteTodo(db *mongo.Database, col string, _id primitive.ObjectID) (status bool, err error) {
+// 	cols := db.Collection(col)
+// 	filter := bson.M{"_id": _id}
+// 	result, err := cols.DeleteOne(context.Background(), filter)
+// 	if err != nil {
+// 		return false, err
+// 	}
+// 	if result.DeletedCount == 0 {
+// 		err = fmt.Errorf("Data tidak berhasil dihapus")
+// 		return false, err
+// 	}
+// 	return true, nil
+// }
 
 // get all gudang a
 func GetAllGudangA(db *mongo.Database) (gudanga []model.GudangA, err error) {
