@@ -295,7 +295,7 @@ func TestInsertGudangA(t *testing.T) {
 	// }
 	var datagudanga model.GudangA
 	datagudanga.Brand = "Adidas"
-	datagudanga.Name = "Five Ten Kestrel Lace Mountain Shoes"
+	datagudanga.Name = "Five Ten Kestrel Lace Mountain Bike Shoes"
 	datagudanga.Category = "Data Science"
 	datagudanga.QTY = "75"
 	datagudanga.SKU = "BC0770 	"
