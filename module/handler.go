@@ -148,7 +148,7 @@ func GCFHandlerGetUser(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r 
 			return GCFReturnStruct(Response)
 		}
 		datastaff.Akun = data
-		return GCFReturnStruct(datastaff) 
+		return GCFReturnStruct(datastaff)
 	}
 	Response.Message = "Tidak ada data"
 	return GCFReturnStruct(Response)
@@ -172,36 +172,36 @@ func GCFHandlerGetUserFromID(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname stri
 	return GCFReturnStruct(data)
 }
 
-// password 
-// var (
-// 	Response model.Response
-// 	password model.Password
-// )
+// password
+var (
+	Response model.Response
+	password model.Password
+)
 
-// func Put(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
-// 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
-// 	Response.Status = false
-// 	//
-// 	user_login, err := GetUserLogin(PASETOPUBLICKEYENV, r)
-// 	if err != nil {
-// 			Response.Message = "Failed to decode token: " + err.Error()
-// 			return GCFReturnStruct(Response)
-// 	}
-// 	err = json.NewDecoder(r.Body).Decode(&password)
-// 	if err != nil {
-// 		Response.Message = "error parsing application/json: " + err.Error()
-// 		return GCFReturnStruct(Response)
-// 	}
-// 	err = UpdatePasswordUser(user_login.Id, conn, password)
-// 	if err != nil {
-// 		Response.Message = err.Error()
-// 		return GCFReturnStruct(Response)
-// 	}
-// 	//
-// 	Response.Status = true
-// 	Response.Message = "Berhasil Update Password"
-// 	return GCFReturnStruct(Response)
-// }
+func Put(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
+	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
+	Response.Status = false
+	//
+	user_login, err := GetUserLogin(PASETOPUBLICKEYENV, r)
+	if err != nil {
+		Response.Message = "Failed to decode token: " + err.Error()
+		return GCFReturnStruct(Response)
+	}
+	err = json.NewDecoder(r.Body).Decode(&password)
+	if err != nil {
+		Response.Message = "error parsing application/json: " + err.Error()
+		return GCFReturnStruct(Response)
+	}
+	err = UpdatePasswordUser(user_login.Id, conn, password)
+	if err != nil {
+		Response.Message = err.Error()
+		return GCFReturnStruct(Response)
+	}
+	//
+	Response.Status = true
+	Response.Message = "Berhasil Update Password"
+	return GCFReturnStruct(Response)
+}
 
 // staff
 func GCFHandlerUpdateStaff(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
@@ -423,21 +423,21 @@ func GCFHandlerGetGudangA(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string,
 	tokenstring := r.Header.Get("Authorization")
 	payload, err := Decode(os.Getenv(PASETOPUBLICKEYENV), tokenstring)
 	if err != nil {
-			Response.Message = "Gagal Decode Token : " + err.Error()
-			return GCFReturnStruct(Response)
+		Response.Message = "Gagal Decode Token : " + err.Error()
+		return GCFReturnStruct(Response)
 	}
 	if payload.Role != "admin" {
-			data, err := GetAllGudangA(conn)
-			if err != nil {
-					Response.Message = err.Error()
-					return GCFReturnStruct(Response)
-			}
-			return GCFReturnStruct(data)
+		data, err := GetAllGudangA(conn)
+		if err != nil {
+			Response.Message = err.Error()
+			return GCFReturnStruct(Response)
+		}
+		return GCFReturnStruct(data)
 	}
 	data, err := GetAllGudangA(conn)
 	if err != nil {
-			Response.Message = err.Error()
-			return GCFReturnStruct(Response)
+		Response.Message = err.Error()
+		return GCFReturnStruct(Response)
 	}
 	return GCFReturnStruct(data)
 }
@@ -587,21 +587,21 @@ func GCFHandlerGetGudangB(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string,
 	tokenstring := r.Header.Get("Authorization")
 	payload, err := Decode(os.Getenv(PASETOPUBLICKEYENV), tokenstring)
 	if err != nil {
-			Response.Message = "Gagal Decode Token : " + err.Error()
-			return GCFReturnStruct(Response)
+		Response.Message = "Gagal Decode Token : " + err.Error()
+		return GCFReturnStruct(Response)
 	}
 	if payload.Role != "admin" {
-			data, err := GetAllGudangB(conn)
-			if err != nil {
-					Response.Message = err.Error()
-					return GCFReturnStruct(Response)
-			}
-			return GCFReturnStruct(data)
+		data, err := GetAllGudangB(conn)
+		if err != nil {
+			Response.Message = err.Error()
+			return GCFReturnStruct(Response)
+		}
+		return GCFReturnStruct(data)
 	}
 	data, err := GetAllGudangB(conn)
 	if err != nil {
-			Response.Message = err.Error()
-			return GCFReturnStruct(Response)
+		Response.Message = err.Error()
+		return GCFReturnStruct(Response)
 	}
 	return GCFReturnStruct(data)
 }
@@ -751,21 +751,21 @@ func GCFHandlerGetGudangC(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string,
 	tokenstring := r.Header.Get("Authorization")
 	payload, err := Decode(os.Getenv(PASETOPUBLICKEYENV), tokenstring)
 	if err != nil {
-			Response.Message = "Gagal Decode Token : " + err.Error()
-			return GCFReturnStruct(Response)
+		Response.Message = "Gagal Decode Token : " + err.Error()
+		return GCFReturnStruct(Response)
 	}
 	if payload.Role != "admin" {
-			data, err := GetAllGudangC(conn)
-			if err != nil {
-					Response.Message = err.Error()
-					return GCFReturnStruct(Response)
-			}
-			return GCFReturnStruct(data)
+		data, err := GetAllGudangC(conn)
+		if err != nil {
+			Response.Message = err.Error()
+			return GCFReturnStruct(Response)
+		}
+		return GCFReturnStruct(data)
 	}
 	data, err := GetAllGudangC(conn)
 	if err != nil {
-			Response.Message = err.Error()
-			return GCFReturnStruct(Response)
+		Response.Message = err.Error()
+		return GCFReturnStruct(Response)
 	}
 	return GCFReturnStruct(data)
 }
@@ -778,5 +778,5 @@ func GCFReturnStruct(DataStuct any) string {
 
 // get id
 func GetID(r *http.Request) string {
-    return r.URL.Query().Get("id")
+	return r.URL.Query().Get("id")
 }
