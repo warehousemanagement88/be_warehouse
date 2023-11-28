@@ -4,8 +4,10 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/hex"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"net/http"
 	"os"
 	"strings"
 
@@ -346,12 +348,22 @@ func GetStaffFromID(_id primitive.ObjectID, db *mongo.Database) (doc model.Staff
 		}
 		return doc, fmt.Errorf("error retrieving data for ID %s: %s", _id, err.Error())
 	}
+	user, err := GetUserFromID(doc.Akun.ID, db)
+	if err != nil {
+		return doc, fmt.Errorf("kesalahan server")
+	}
+	akun := model.User{
+		ID:    user.ID,
+		Email: user.Email,
+		Role:  user.Role,
+	}
+	doc.Akun = akun
 	return doc, nil
 }
 
-func GetStaffFromAkun(akun primitive.ObjectID, db *mongo.Database) (doc model.Staff, err error) {
+func GetStaffFromAkun(id_akun primitive.ObjectID, db *mongo.Database) (doc model.Staff, err error) {
 	collection := db.Collection("staff")
-	filter := bson.M{"akun._id": akun}
+	filter := bson.M{"akun._id": id_akun}
 	err = collection.FindOne(context.TODO(), filter).Decode(&doc)
 	if err != nil {
 		if err == mongo.ErrNoDocuments {
@@ -359,7 +371,46 @@ func GetStaffFromAkun(akun primitive.ObjectID, db *mongo.Database) (doc model.St
 		}
 		return doc, fmt.Errorf("kesalahan server")
 	}
+	user, err := GetUserFromID(doc.Akun.ID, db)
+	if err != nil {
+		return doc, fmt.Errorf("kesalahan server")
+	}
+	akun := model.User{
+		ID:    user.ID,
+		Email: user.Email,
+		Role:  user.Role,
+	}
+	doc.Akun = akun
 	return doc, nil
+}
+
+//email
+func UpdateEmailUser(iduser primitive.ObjectID, db *mongo.Database, insertedDoc model.User) error {
+	dataUser, err := GetUserFromID(iduser, db)
+	if err != nil {
+		return err
+	}
+	if insertedDoc.Email == "" {
+		return fmt.Errorf("mohon untuk melengkapi data")
+	}
+	if err = checkmail.ValidateFormat(insertedDoc.Email); err != nil {
+		return fmt.Errorf("email tidak valid")
+	}
+	existsDoc, _ := GetUserFromEmail(insertedDoc.Email, db)
+	if existsDoc.Email == insertedDoc.Email {
+		return fmt.Errorf("email sudah terdaftar")
+	}
+	user := bson.M{
+		"email":    insertedDoc.Email,
+		"password": dataUser.Password,
+		"salt":     dataUser.Salt,
+		"role":     dataUser.Role,
+	}
+	err = UpdateOneDoc(iduser, db, "user", user)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // Gudang A
@@ -687,4 +738,26 @@ func GetGudangCFromID(_id primitive.ObjectID, db *mongo.Database) (gudangc model
 		return gudangc, fmt.Errorf("error retrieving data for ID %s: %s", _id, err.Error())
 	}
 	return gudangc, nil
+}
+
+
+// get user login
+func GetUserLogin(PASETOPUBLICKEYENV string, r *http.Request) (model.Payload, error) {
+	tokenstring := r.Header.Get("Authorization")
+	payload, err := Decode(os.Getenv(PASETOPUBLICKEYENV), tokenstring)
+	if err != nil {
+		return payload, err
+	}
+	return payload, nil
+}
+
+// get id
+func GetID(r *http.Request) string {
+    return r.URL.Query().Get("id")
+}
+
+// return struct
+func GCFReturnStruct(DataStuct any) string {
+	jsondata, _ := json.Marshal(DataStuct)
+	return string(jsondata)
 }
