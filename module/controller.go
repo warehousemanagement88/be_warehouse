@@ -418,8 +418,7 @@ func UpdateEmailUser(iduser primitive.ObjectID, db *mongo.Database, insertedDoc 
 func InsertGudangA(_id primitive.ObjectID, db *mongo.Database, insertedDoc model.GudangA) error {
 	if insertedDoc.Brand == "" || insertedDoc.Name == "" || insertedDoc.Category == "" || insertedDoc.QTY == "" ||
 	insertedDoc.SKU == "" || insertedDoc.SellingPrice == "" || insertedDoc.OriginalPrice == "" ||
-	insertedDoc.Availability == "" || insertedDoc.Color == "" || insertedDoc.Breadcrumbs == "" ||
-	insertedDoc.Date.IsZero() {
+	insertedDoc.Availability == "" || insertedDoc.Color == "" || insertedDoc.Breadcrumbs == "" {
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
 	// gudanga := bson.M{
