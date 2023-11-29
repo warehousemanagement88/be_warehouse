@@ -304,7 +304,7 @@ func UpdateStaff(idparam, iduser primitive.ObjectID, db *mongo.Database, inserte
 		return err
 	}
 	if staff.ID != idparam {
-		return fmt.Errorf("kamu bukan pemilik data ini")
+		return fmt.Errorf("anda bukan pemilik data ini")
 	}
 	if insertedDoc.NamaLengkap == "" || insertedDoc.Jabatan == "" || insertedDoc.JenisKelamin == ""  {
 		return fmt.Errorf("mohon untuk melengkapi data")

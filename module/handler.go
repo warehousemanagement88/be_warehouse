@@ -107,7 +107,7 @@ func GetUser(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r *http.Requ
 		return GCFReturnStruct(Response)
 	}
 	if user_login.Role != "admin" {
-		Response.Message = "Kamu bukan admin"
+		Response.Message = "Anda bukan admin"
 		return GCFReturnStruct(Response)
 	}
 	id := GetID(r)
@@ -168,7 +168,7 @@ func GCFHandlerGetAllUserByAdmin(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname 
 		return GCFReturnStruct(Response)
 	}
 	if payload.Role != "admin" {
-		Response.Message = "Kamu bukan admin"
+		Response.Message = "Anda bukan admin"
 		return GCFReturnStruct(Response)
 	}
 	data, err := GetAllUser(conn)
@@ -378,7 +378,7 @@ func GCFHandlerInsertGudangA(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname stri
 		return GCFReturnStruct(Response)
 	}
 	if payload.Role != "admin" {
-		Response.Message = "Maneh tidak memiliki akses"
+		Response.Message = "Anda tidak memiliki akses"
 		return GCFReturnStruct(Response)
 	}
 	var datagudanga model.GudangA
@@ -448,7 +448,7 @@ func GCFHandlerDeleteGudangA(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname stri
 		return GCFReturnStruct(Response)
 	}
 	if payload.Role != "admin" {
-		Response.Message = "Maneh tidak memiliki akses"
+		Response.Message = "Anda tidak memiliki akses"
 		return GCFReturnStruct(Response)
 	}
 	id := GetID(r)
@@ -508,21 +508,16 @@ func GCFHandlerGetGudangA(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string,
 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
 	var Response model.Response
 	Response.Status = false
-	tokenstring := r.Header.Get("Authorization")
-	payload, err := Decode(os.Getenv(PASETOPUBLICKEYENV), tokenstring)
+	id := GetID(r)
+	if id == "" {
+		return GCFHandlerGetAllGudangA(MONGOCONNSTRINGENV, dbname)
+	}
+	objID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
-		Response.Message = "Gagal Decode Token : " + err.Error()
+		Response.Message = "Invalid id parameter"
 		return GCFReturnStruct(Response)
 	}
-	if payload.Role != "admin" {
-		data, err := GetAllGudangA(conn)
-		if err != nil {
-			Response.Message = err.Error()
-			return GCFReturnStruct(Response)
-		}
-		return GCFReturnStruct(data)
-	}
-	data, err := GetAllGudangA(conn)
+	data, err := GetGudangAFromID(objID, conn)
 	if err != nil {
 		Response.Message = err.Error()
 		return GCFReturnStruct(Response)
@@ -542,7 +537,7 @@ func GCFHandlerInsertGudangB(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname stri
 		return GCFReturnStruct(Response)
 	}
 	if payload.Role != "admin" {
-		Response.Message = "Maneh tidak memiliki akses"
+		Response.Message = "Anda tidak memiliki akses"
 		return GCFReturnStruct(Response)
 	}
 	var datagudangb model.GudangB
@@ -612,7 +607,7 @@ func GCFHandlerDeleteGudangB(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname stri
 		return GCFReturnStruct(Response)
 	}
 	if payload.Role != "admin" {
-		Response.Message = "Maneh tidak memiliki akses"
+		Response.Message = "Anda tidak memiliki akses"
 		return GCFReturnStruct(Response)
 	}
 	id := GetID(r)
@@ -672,21 +667,16 @@ func GCFHandlerGetGudangB(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string,
 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
 	var Response model.Response
 	Response.Status = false
-	tokenstring := r.Header.Get("Authorization")
-	payload, err := Decode(os.Getenv(PASETOPUBLICKEYENV), tokenstring)
+	id := GetID(r)
+	if id == "" {
+		return GCFHandlerGetAllGudangB(MONGOCONNSTRINGENV, dbname)
+	}
+	objID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
-		Response.Message = "Gagal Decode Token : " + err.Error()
+		Response.Message = "Invalid id parameter"
 		return GCFReturnStruct(Response)
 	}
-	if payload.Role != "admin" {
-		data, err := GetAllGudangB(conn)
-		if err != nil {
-			Response.Message = err.Error()
-			return GCFReturnStruct(Response)
-		}
-		return GCFReturnStruct(data)
-	}
-	data, err := GetAllGudangB(conn)
+	data, err := GetGudangBFromID(objID, conn)
 	if err != nil {
 		Response.Message = err.Error()
 		return GCFReturnStruct(Response)
@@ -706,7 +696,7 @@ func GCFHandlerInsertGudangC(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname stri
 		return GCFReturnStruct(Response)
 	}
 	if payload.Role != "admin" {
-		Response.Message = "Maneh tidak memiliki akses"
+		Response.Message = "Anda tidak memiliki akses"
 		return GCFReturnStruct(Response)
 	}
 	var datagudangc model.GudangC
@@ -776,7 +766,7 @@ func GCFHandlerDeleteGudangC(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname stri
 		return GCFReturnStruct(Response)
 	}
 	if payload.Role != "admin" {
-		Response.Message = "Maneh tidak memiliki akses"
+		Response.Message = "Anda tidak memiliki akses"
 		return GCFReturnStruct(Response)
 	}
 	id := GetID(r)
@@ -836,21 +826,16 @@ func GCFHandlerGetGudangC(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string,
 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
 	var Response model.Response
 	Response.Status = false
-	tokenstring := r.Header.Get("Authorization")
-	payload, err := Decode(os.Getenv(PASETOPUBLICKEYENV), tokenstring)
+	id := GetID(r)
+	if id == "" {
+		return GCFHandlerGetAllGudangC(MONGOCONNSTRINGENV, dbname)
+	}
+	objID, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
-		Response.Message = "Gagal Decode Token : " + err.Error()
+		Response.Message = "Invalid id parameter"
 		return GCFReturnStruct(Response)
 	}
-	if payload.Role != "admin" {
-		data, err := GetAllGudangC(conn)
-		if err != nil {
-			Response.Message = err.Error()
-			return GCFReturnStruct(Response)
-		}
-		return GCFReturnStruct(data)
-	}
-	data, err := GetAllGudangC(conn)
+	data, err := GetGudangCFromID(objID, conn)
 	if err != nil {
 		Response.Message = err.Error()
 		return GCFReturnStruct(Response)
