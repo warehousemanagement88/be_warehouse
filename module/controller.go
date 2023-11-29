@@ -458,8 +458,7 @@ func UpdateGudangA(idparam, iduser primitive.ObjectID, db *mongo.Database, inser
 	}
 	if insertedDoc.Brand == "" || insertedDoc.Name == "" || insertedDoc.Category == "" || insertedDoc.QTY == "" ||
 	insertedDoc.SKU == "" || insertedDoc.SellingPrice == "" || insertedDoc.OriginalPrice == "" ||
-	insertedDoc.Availability == "" || insertedDoc.Color == "" || insertedDoc.Breadcrumbs == "" ||
-	insertedDoc.Date.IsZero() {
+	insertedDoc.Availability == "" || insertedDoc.Color == "" || insertedDoc.Breadcrumbs == "" {
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
 
@@ -572,8 +571,7 @@ func UpdateGudangB(idparam, iduser primitive.ObjectID, db *mongo.Database, inser
 	}
 	if insertedDoc.Brand == "" || insertedDoc.Name == "" || insertedDoc.Category == "" || insertedDoc.QTY == "" ||
 	insertedDoc.SKU == "" || insertedDoc.SellingPrice == "" || insertedDoc.OriginalPrice == "" ||
-	insertedDoc.Availability == "" || insertedDoc.Color == "" || insertedDoc.Breadcrumbs == "" ||
-	insertedDoc.Date.IsZero() {
+	insertedDoc.Availability == "" || insertedDoc.Color == "" || insertedDoc.Breadcrumbs == "" {
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
 
@@ -672,8 +670,7 @@ func UpdateGudangC(idparam, iduser primitive.ObjectID, db *mongo.Database, inser
 	}
 	if insertedDoc.Brand == "" || insertedDoc.Name == "" || insertedDoc.Category == "" || insertedDoc.QTY == "" ||
 	insertedDoc.SKU == "" || insertedDoc.SellingPrice == "" || insertedDoc.OriginalPrice == "" ||
-	insertedDoc.Availability == "" || insertedDoc.Color == "" || insertedDoc.Breadcrumbs == "" ||
-	insertedDoc.Date.IsZero() {
+	insertedDoc.Availability == "" || insertedDoc.Color == "" || insertedDoc.Breadcrumbs == "" {
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
 
