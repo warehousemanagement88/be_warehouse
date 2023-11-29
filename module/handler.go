@@ -362,7 +362,7 @@ func PutEmail(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r *http.Req
 	}
 	//
 	Response.Status = true
-	Response.Message = "Berhasil Update Email"
+	Response.Message = "Berhasil Update Email yey!"
 	return GCFReturnStruct(Response)
 }
 
