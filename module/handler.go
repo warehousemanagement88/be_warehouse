@@ -483,7 +483,7 @@ func GCFHandlerGetAllGudangA(MONGOCONNSTRINGENV, dbname string) string {
 	return GCFReturnStruct(data)
 }
 
-func GCFHandlerGetGudangAFromID(MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
+func GCFHandlerGetGudangAFromID(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
 	var Response model.Response
 	Response.Status = false
@@ -647,7 +647,7 @@ func GCFHandlerGetAllGudangB(MONGOCONNSTRINGENV, dbname string) string {
 	return GCFReturnStruct(data)
 }
 
-func GCFHandlerGetGudangBFromID(MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
+func GCFHandlerGetGudangBFromID(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
 	var Response model.Response
 	Response.Status = false
@@ -811,7 +811,7 @@ func GCFHandlerGetAllGudangC(MONGOCONNSTRINGENV, dbname string) string {
 	return GCFReturnStruct(data)
 }
 
-func GCFHandlerGetGudangCFromID(MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
+func GCFHandlerGetGudangCFromID(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
 	var Response model.Response
 	Response.Status = false
