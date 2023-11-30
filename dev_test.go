@@ -1,11 +1,10 @@
-package Fatwa_1214038
+package Warehouse
 
 import (
 	"crypto/rand"
 	"encoding/hex"
 	"fmt"
 	"testing"
-	"time"
 
 	"github.com/warehousemanagement88/be_warehouse/model"
 	"github.com/warehousemanagement88/be_warehouse/module"
@@ -304,7 +303,6 @@ func TestInsertGudangA(t *testing.T) {
 	datagudanga.Availability = "InStock"
 	datagudanga.Color = "Grey"
 	datagudanga.Breadcrumbs = "Women/Shoes"
-	datagudanga.Date = time.Now() // Inisialisasi dengan waktu saat ini
 	err = module.InsertGudangA(payload.Id, conn, datagudanga)
 	if err != nil {
 		t.Errorf("Error insert : %v", err)
@@ -334,7 +332,6 @@ func TestUpdateGudangA(t *testing.T) {
 	datagudanga.Availability = "InStock"
 	datagudanga.Color = "Grey"
 	datagudanga.Breadcrumbs = "Women/Shoes"
-	datagudanga.Date = time.Now() // Inisialisasi dengan waktu saat ini
 	id := "6561b5eb4390db31095e1c16"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
@@ -416,7 +413,6 @@ func TestInsertGudangB(t *testing.T) {
 	datagudangb.Availability = "InStock"
 	datagudangb.Color = "Grey"
 	datagudangb.Breadcrumbs = "Women/Shoes"
-	datagudangb.Date = time.Now() // Inisialisasi dengan waktu saat ini
 	err = module.InsertGudangB(payload.Id, conn, datagudangb)
 	if err != nil {
 		t.Errorf("Error insert : %v", err)
@@ -446,7 +442,6 @@ func TestUpdateGudangB(t *testing.T) {
 	datagudangb.Availability = "InStock"
 	datagudangb.Color = "Grey"
 	datagudangb.Breadcrumbs = "Women/Shoes"
-	datagudangb.Date = time.Now() // Inisialisasi dengan waktu saat ini
 	id := "6561b73e8578b8f5ceb7dedb"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
@@ -528,7 +523,6 @@ func TestInsertGudangC(t *testing.T) {
 	datagudangc.Availability = "InStock"
 	datagudangc.Color = "Grey"
 	datagudangc.Breadcrumbs = "Women/Shoes"
-	datagudangc.Date = time.Now() // Inisialisasi dengan waktu saat ini
 	err = module.InsertGudangC(payload.Id, conn, datagudangc)
 	if err != nil {
 		t.Errorf("Error insert : %v", err)
@@ -558,7 +552,6 @@ func TestUpdateGudangC(t *testing.T) {
 	datagudangc.Availability = "InStock"
 	datagudangc.Color = "Grey"
 	datagudangc.Breadcrumbs = "Women/Shoes"
-	datagudangc.Date = time.Now() // Inisialisasi dengan waktu saat ini
 	id := "6561b7f8cef2ca5a0ca3ea17"
 	objectId, err := primitive.ObjectIDFromHex(id)
 	if err != nil {
