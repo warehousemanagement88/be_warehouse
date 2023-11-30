@@ -43,7 +43,7 @@ type GudangA struct {
 	Availability  string             `bson:"availability,omitempty" json:"availability,omitempty"`
 	Color         string             `bson:"color,omitempty" json:"color,omitempty"`
 	Breadcrumbs   string             `bson:"breadcrumbs,omitempty" json:"breadcrumbs,omitempty"`
-	Date          primitive.DateTime          `bson:"date,omitempty" json:"date,omitempty"`
+	Date          time.Time          `bson:"date,omitempty" json:"date,omitempty"`
 }
 type GudangB struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
@@ -57,7 +57,7 @@ type GudangB struct {
 	Availability  string             `bson:"availability,omitempty" json:"availability,omitempty"`
 	Color         string             `bson:"color,omitempty" json:"color,omitempty"`
 	Breadcrumbs   string             `bson:"breadcrumbs,omitempty" json:"breadcrumbs,omitempty"`
-	Date          primitive.DateTime          `bson:"date,omitempty" json:"date,omitempty"`
+	Date          time.Time          `bson:"date,omitempty" json:"date,omitempty"`
 }
 type GudangC struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
@@ -71,7 +71,7 @@ type GudangC struct {
 	Availability  string             `bson:"availability,omitempty" json:"availability,omitempty"`
 	Color         string             `bson:"color,omitempty" json:"color,omitempty"`
 	Breadcrumbs   string             `bson:"breadcrumbs,omitempty" json:"breadcrumbs,omitempty"`
-	Date          primitive.DateTime          `bson:"date,omitempty" json:"date,omitempty"`
+	Date          time.Time          `bson:"date,omitempty" json:"date,omitempty"`
 }
 
 type Credential struct {
