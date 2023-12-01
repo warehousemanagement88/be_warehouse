@@ -462,19 +462,19 @@ func UpdateGudangA(idparam, iduser primitive.ObjectID, db *mongo.Database, inser
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
 
-	gudanga := bson.M{
-		"brand": insertedDoc.Brand,
-		"name": insertedDoc.Name,
-		"category": insertedDoc.Category,
-		"qty": insertedDoc.QTY,
-		"sku": insertedDoc.SKU,
-		"sellingprice": insertedDoc.SellingPrice,
-		"originalprice": insertedDoc.OriginalPrice,
-		"breadcrumbs": insertedDoc.Breadcrumbs,
-		"date": insertedDoc.Date,
-	}
+	// gudanga := bson.M{
+	// 	"brand": insertedDoc.Brand,
+	// 	"name": insertedDoc.Name,
+	// 	"category": insertedDoc.Category,
+	// 	"qty": insertedDoc.QTY,
+	// 	"sku": insertedDoc.SKU,
+	// 	"sellingprice": insertedDoc.SellingPrice,
+	// 	"originalprice": insertedDoc.OriginalPrice,
+	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
+	// 	"date": insertedDoc.Date,
+	// }
 
-	err = UpdateOneDoc(idparam, db, "gudanga", gudanga)
+	err = UpdateOneDoc(idparam, db, "gudanga", insertedDoc)
 	if err != nil {
 		return err
 	}
@@ -545,18 +545,18 @@ func InsertGudangB(_id primitive.ObjectID, db *mongo.Database, insertedDoc model
 	insertedDoc.Availability == "" || insertedDoc.Color == "" || insertedDoc.Breadcrumbs == "" {
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
-	gudangb := bson.M{
-		"brand": insertedDoc.Brand,
-		"name": insertedDoc.Name,
-		"category": insertedDoc.Category,
-		"qty": insertedDoc.QTY,
-		"sku": insertedDoc.SKU,
-		"sellingprice": insertedDoc.SellingPrice,
-		"originalprice": insertedDoc.OriginalPrice,
-		"breadcrumbs": insertedDoc.Breadcrumbs,
-		"date": insertedDoc.Date,
-	}
-	_, err := InsertOneDoc(db, "gudangb", gudangb)
+	// gudangb := bson.M{
+	// 	"brand": insertedDoc.Brand,
+	// 	"name": insertedDoc.Name,
+	// 	"category": insertedDoc.Category,
+	// 	"qty": insertedDoc.QTY,
+	// 	"sku": insertedDoc.SKU,
+	// 	"sellingprice": insertedDoc.SellingPrice,
+	// 	"originalprice": insertedDoc.OriginalPrice,
+	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
+	// 	"date": insertedDoc.Date,
+	// }
+	_, err := InsertOneDoc(db, "gudangb", insertedDoc)
 	if err != nil {
 		return err
 	}
@@ -575,19 +575,19 @@ func UpdateGudangB(idparam, iduser primitive.ObjectID, db *mongo.Database, inser
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
 
-	gudangb := bson.M{
-		"brand": insertedDoc.Brand,
-		"name": insertedDoc.Name,
-		"category": insertedDoc.Category,
-		"qty": insertedDoc.QTY,
-		"sku": insertedDoc.SKU,
-		"sellingprice": insertedDoc.SellingPrice,
-		"originalprice": insertedDoc.OriginalPrice,
-		"breadcrumbs": insertedDoc.Breadcrumbs,
-		"date": insertedDoc.Date,
-	}
+	// gudangb := bson.M{
+	// 	"brand": insertedDoc.Brand,
+	// 	"name": insertedDoc.Name,
+	// 	"category": insertedDoc.Category,
+	// 	"qty": insertedDoc.QTY,
+	// 	"sku": insertedDoc.SKU,
+	// 	"sellingprice": insertedDoc.SellingPrice,
+	// 	"originalprice": insertedDoc.OriginalPrice,
+	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
+	// 	"date": insertedDoc.Date,
+	// }
 
-	err = UpdateOneDoc(idparam, db, "gudangb", gudangb)
+	err = UpdateOneDoc(idparam, db, "gudangb", insertedDoc)
 	if err != nil {
 		return err
 	}
@@ -644,18 +644,18 @@ func InsertGudangC(_id primitive.ObjectID, db *mongo.Database, insertedDoc model
 	insertedDoc.Availability == "" || insertedDoc.Color == "" || insertedDoc.Breadcrumbs == "" {
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
-	gudangc := bson.M{
-		"brand": insertedDoc.Brand,
-		"name": insertedDoc.Name,
-		"category": insertedDoc.Category,
-		"qty": insertedDoc.QTY,
-		"sku": insertedDoc.SKU,
-		"sellingprice": insertedDoc.SellingPrice,
-		"originalprice": insertedDoc.OriginalPrice,
-		"breadcrumbs": insertedDoc.Breadcrumbs,
-		"date": insertedDoc.Date,
-	}
-	_, err := InsertOneDoc(db, "gudangc", gudangc)
+	// gudangc := bson.M{
+	// 	"brand": insertedDoc.Brand,
+	// 	"name": insertedDoc.Name,
+	// 	"category": insertedDoc.Category,
+	// 	"qty": insertedDoc.QTY,
+	// 	"sku": insertedDoc.SKU,
+	// 	"sellingprice": insertedDoc.SellingPrice,
+	// 	"originalprice": insertedDoc.OriginalPrice,
+	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
+	// 	"date": insertedDoc.Date,
+	// }
+	_, err := InsertOneDoc(db, "gudangc", insertedDoc)
 	if err != nil {
 		return err
 	}
@@ -674,19 +674,19 @@ func UpdateGudangC(idparam, iduser primitive.ObjectID, db *mongo.Database, inser
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
 
-	gudangc := bson.M{
-		"brand": insertedDoc.Brand,
-		"name": insertedDoc.Name,
-		"category": insertedDoc.Category,
-		"qty": insertedDoc.QTY,
-		"sku": insertedDoc.SKU,
-		"sellingprice": insertedDoc.SellingPrice,
-		"originalprice": insertedDoc.OriginalPrice,
-		"breadcrumbs": insertedDoc.Breadcrumbs,
-		"date": insertedDoc.Date,
-	}
+	// gudangc := bson.M{
+	// 	"brand": insertedDoc.Brand,
+	// 	"name": insertedDoc.Name,
+	// 	"category": insertedDoc.Category,
+	// 	"qty": insertedDoc.QTY,
+	// 	"sku": insertedDoc.SKU,
+	// 	"sellingprice": insertedDoc.SellingPrice,
+	// 	"originalprice": insertedDoc.OriginalPrice,
+	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
+	// 	"date": insertedDoc.Date,
+	// }
 
-	err = UpdateOneDoc(idparam, db, "gudangc", gudangc)
+	err = UpdateOneDoc(idparam, db, "gudangc", insertedDoc)
 	if err != nil {
 		return err
 	}
