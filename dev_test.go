@@ -201,15 +201,15 @@ func TestUpdateStaff(t *testing.T) {
 	var doc model.Staff
 	id := "654a01bde89e6f232a62e41d"
 	objectId, _ := primitive.ObjectIDFromHex(id)
-	id2 := "654a01bce89e6f232a62e41b"
-	userid, _ := primitive.ObjectIDFromHex(id2)
+	// id2 := "654a01bce89e6f232a62e41b"
+	// userid, _ := primitive.ObjectIDFromHex(id2)
 	doc.NamaLengkap = "Agita Nurfadillah"
 	doc.Jabatan = "Kepala Gudang"
 	doc.JenisKelamin = "Perempuan"
 	if doc.NamaLengkap == "" || doc.Jabatan == "" || doc.JenisKelamin == "" {
 		t.Errorf("mohon untuk melengkapi data")
 	} else {
-		err := module.UpdateStaff(objectId, userid, db, doc)
+		err := module.UpdateStaff(objectId, db, doc)
 		if err != nil {
 			t.Errorf("Error inserting document: %v", err)
 			fmt.Println("Data tidak berhasil diupdate")

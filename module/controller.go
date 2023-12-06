@@ -299,14 +299,7 @@ func GetUserFromEmail(email string, db *mongo.Database) (doc model.User, err err
 }
 
 // staff
-func UpdateStaff(idparam, iduser primitive.ObjectID, db *mongo.Database, insertedDoc model.Staff) error {
-	staff, err := GetStaffFromAkun(iduser, db)
-	if err != nil {
-		return err
-	}
-	if staff.ID != idparam {
-		return fmt.Errorf("anda bukan pemilik data ini")
-	}
+func UpdateStaff(idparam primitive.ObjectID, db *mongo.Database, insertedDoc model.Staff) error {
 	if insertedDoc.NamaLengkap == "" || insertedDoc.Jabatan == "" || insertedDoc.JenisKelamin == ""  {
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
@@ -315,10 +308,10 @@ func UpdateStaff(idparam, iduser primitive.ObjectID, db *mongo.Database, inserte
 		"jabatan": insertedDoc.Jabatan,
 		"jeniskelamin": insertedDoc.JenisKelamin,
 		"akun": model.User {
-			ID : staff.Akun.ID,
+			ID : idparam,
 		},
 	}
-	err = UpdateOneDoc(idparam, db, "staff", stf)
+	err := UpdateOneDoc(idparam, db, "staff", stf)
 	if err != nil {
 		return err
 	}

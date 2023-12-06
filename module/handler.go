@@ -295,7 +295,7 @@ func GCFHandlerUpdateStaff(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname string
 		Response.Message = "error parsing application/json: " + err.Error()
 		return GCFReturnStruct(Response)
 	}
-	err = UpdateStaff(idparam, payload.Id, conn, datastaff)
+	err = UpdateStaff(idparam, conn, datastaff)
 	if err != nil {
 		Response.Message = err.Error()
 		return GCFReturnStruct(Response)
@@ -327,11 +327,20 @@ func GCFHandlerGetStaffFromID(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname str
 		Response.Message = err.Error()
 		return GCFReturnStruct(Response)
 	}
+	id := GetID(r)
+	if id == "" {
+		return GCFHandlerGetAllStaff(MONGOCONNSTRINGENV, dbname)
+	}
+	idparam, err := primitive.ObjectIDFromHex(id)
+	if err != nil {
+		Response.Message = "Invalid id parameter"
+		return GCFReturnStruct(Response)
+	}
 	if payload.Role != "admin" {
 		Response.Message = "Anda bukan admin"
 		return GCFReturnStruct(Response)
 	}
-	data, err := GetStaffFromAkun(payload.Id, conn)
+	data, err := GetStaffFromAkun(idparam, conn)
 	if err != nil {
 		Response.Message = err.Error()
 		return GCFReturnStruct(Response)
