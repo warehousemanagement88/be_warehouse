@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/badoux/checkmail"
 	"github.com/warehousemanagement88/be_warehouse/model"
@@ -432,6 +433,7 @@ func InsertGudangA(_id primitive.ObjectID, db *mongo.Database, insertedDoc model
 	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
 	// 	"date": insertedDoc.Date,
 	// }
+	insertedDoc.Date = time.Now()
 	_, err := InsertOneDoc(db, "gudanga", insertedDoc)
 	if err != nil {
 		fmt.Printf("InsertGudangA: %v\n", err)
@@ -473,7 +475,7 @@ func UpdateGudangA(idparam, iduser primitive.ObjectID, db *mongo.Database, inser
 	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
 	// 	"date": insertedDoc.Date,
 	// }
-
+	insertedDoc.Date = time.Now()
 	err = UpdateOneDoc(idparam, db, "gudanga", insertedDoc)
 	if err != nil {
 		return err
@@ -556,6 +558,7 @@ func InsertGudangB(_id primitive.ObjectID, db *mongo.Database, insertedDoc model
 	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
 	// 	"date": insertedDoc.Date,
 	// }
+	insertedDoc.Date = time.Now()
 	_, err := InsertOneDoc(db, "gudangb", insertedDoc)
 	if err != nil {
 		return err
@@ -586,7 +589,7 @@ func UpdateGudangB(idparam, iduser primitive.ObjectID, db *mongo.Database, inser
 	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
 	// 	"date": insertedDoc.Date,
 	// }
-
+	insertedDoc.Date = time.Now()
 	err = UpdateOneDoc(idparam, db, "gudangb", insertedDoc)
 	if err != nil {
 		return err
@@ -655,6 +658,7 @@ func InsertGudangC(_id primitive.ObjectID, db *mongo.Database, insertedDoc model
 	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
 	// 	"date": insertedDoc.Date,
 	// }
+	insertedDoc.Date = time.Now()
 	_, err := InsertOneDoc(db, "gudangc", insertedDoc)
 	if err != nil {
 		return err
@@ -685,7 +689,7 @@ func UpdateGudangC(idparam, iduser primitive.ObjectID, db *mongo.Database, inser
 	// 	"breadcrumbs": insertedDoc.Breadcrumbs,
 	// 	"date": insertedDoc.Date,
 	// }
-
+	insertedDoc.Date = time.Now()
 	err = UpdateOneDoc(idparam, db, "gudangc", insertedDoc)
 	if err != nil {
 		return err
