@@ -28,6 +28,7 @@ type Staff struct {
 	NamaLengkap  string             `bson:"namalengkap,omitempty" json:"namalengkap,omitempty"`
 	Jabatan      string             `bson:"jabatan,omitempty" json:"jabatan,omitempty"`
 	JenisKelamin string             `bson:"jeniskelamin,omitempty" json:"jeniskelamin,omitempty"`
+	NoHP 				 string         		`bson:"nohp,omitempty" json:"nohp,omitempty"`
 	Akun         User               `bson:"akun,omitempty" json:"akun,omitempty"`
 }
 

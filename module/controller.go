@@ -1,6 +1,7 @@
 package module
 
 import (
+	"bytes"
 	"context"
 	"crypto/rand"
 	"encoding/hex"
@@ -131,7 +132,7 @@ func DeleteOneDoc(_id primitive.ObjectID, db *mongo.Database, col string) error 
 // signup
 func SignUpStaff(db *mongo.Database, insertedDoc model.Staff) error {
 	objectId := primitive.NewObjectID() 
-	if insertedDoc.NamaLengkap == "" || insertedDoc.Jabatan == "" || insertedDoc.JenisKelamin == "" || insertedDoc.Akun.Email == "" || insertedDoc.Akun.Password == "" {
+	if insertedDoc.NamaLengkap == "" || insertedDoc.Jabatan == "" || insertedDoc.NoHP == "" || insertedDoc.JenisKelamin == "" || insertedDoc.Akun.Email == "" || insertedDoc.Akun.Password == "" {
 		return fmt.Errorf("mohon untuk melengkapi data")
 	} 
 	if err := checkmail.ValidateFormat(insertedDoc.Akun.Email); err != nil {
@@ -167,6 +168,7 @@ func SignUpStaff(db *mongo.Database, insertedDoc model.Staff) error {
 		"namalengkap": insertedDoc.NamaLengkap,
 		"jabatan": insertedDoc.Jabatan,
 		"jeniskelamin": insertedDoc.JenisKelamin,
+		"nohp": insertedDoc.NoHP,
 		"akun": model.User {
 			ID : objectId,
 		},
@@ -179,6 +181,47 @@ func SignUpStaff(db *mongo.Database, insertedDoc model.Staff) error {
 	if err != nil {
 		return fmt.Errorf("kesalahan server")
 	}
+	// Send whatsapp confirmation
+	err = SendWhatsAppConfirmation(insertedDoc.NamaLengkap, insertedDoc.NoHP, insertedDoc.Akun.Email, insertedDoc.Akun.Password)
+	if err != nil {
+		return fmt.Errorf("SendWhatsAppConfirmation: %v", err)
+	}
+	return nil
+}
+
+func SendWhatsAppConfirmation(namalengkap, nohp, email, password string) error {
+	url := "https://api.wa.my.id/api/send/message/text"
+
+	// Data yang akan dikirimkan dalam format JSON
+	jsonStr := []byte(`{
+        "to": "` + nohp + `",
+        "isgroup": false,
+        "messages": "Hello ` + namalengkap + `!!!\nAkun kamu sudah dibuat, silahkan login dengan akun berikut: \n Email: ` + email + ` \n Password: ` + password + ` .\nWebsite: https://stocksynergy.my.id/build/pages/sign-in.html"
+    }`)
+
+	// Membuat permintaan HTTP POST
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
+	if err != nil {
+		return err
+	}
+
+	// Menambahkan header ke permintaan
+	req.Header.Set("Accept", "application/json")
+	req.Header.Set("Token", os.Getenv("TOKENWEBHOOK"))
+	// req.Header.Set("Token", "v4.public.eyJleHAiOiIyMDI0LTAyLTE5VDIxOjA3OjM2WiIsImlhdCI6IjIwMjQtMDEtMjBUMjE6MDc6MzZaIiwiaWQiOiI2MjgyMzE3MTUwNjgxIiwibmJmIjoiMjAyNC0wMS0yMFQyMTowNzozNloiff1YQuHHPwSzGpisAMb9rTLP58-jCqtByzePJACBLghprkq2HXtTSbVTShc49m3GIVkU42VSl8uSGme8c4vXnQc")
+	req.Header.Set("Content-Type", "application/json")
+
+	// Melakukan permintaan HTTP POST
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	// Menampilkan respons dari server
+	fmt.Println("Response Status:", resp.Status)
+
 	return nil
 }
 
@@ -300,13 +343,14 @@ func GetUserFromEmail(email string, db *mongo.Database) (doc model.User, err err
 
 // staff
 func UpdateStaff(idparam primitive.ObjectID, db *mongo.Database, insertedDoc model.Staff) error {
-	if insertedDoc.NamaLengkap == "" || insertedDoc.Jabatan == "" || insertedDoc.JenisKelamin == ""  {
+	if insertedDoc.NamaLengkap == "" || insertedDoc.Jabatan == "" || insertedDoc.JenisKelamin == "" || insertedDoc.NoHP == ""  {
 		return fmt.Errorf("mohon untuk melengkapi data")
 	}
 	stf := bson.M{
 		"namalengkap": insertedDoc.NamaLengkap,
 		"jabatan": insertedDoc.Jabatan,
 		"jeniskelamin": insertedDoc.JenisKelamin,
+		"nohp": insertedDoc.NoHP,
 		"akun": model.User {
 			ID : idparam,
 		},
