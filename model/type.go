@@ -38,7 +38,7 @@ type Location struct {
 
 type Gudang struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
-	Locations      []Location         `bson:"locations,omitempty" json:"locations,omitempty"`
+	Locations     []Location         `bson:"locations,omitempty" json:"locations,omitempty"`
 	Brand         string             `bson:"brand,omitempty" json:"brand,omitempty"`
 	Name          string             `bson:"name,omitempty" json:"name,omitempty"`
 	Category      string             `bson:"category,omitempty" json:"category,omitempty"`

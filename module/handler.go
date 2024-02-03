@@ -643,7 +643,7 @@ func GCFHandlerGetAllProducts(MONGOCONNSTRINGENV, dbname string) string {
 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
 	var Response model.Response
 	Response.Status = false
-	data, err := GetAllGudangB(conn)
+	data, err := GetAllProducts(conn)
 	if err != nil {
 		Response.Message = err.Error()
 		return GCFReturnStruct(Response)
