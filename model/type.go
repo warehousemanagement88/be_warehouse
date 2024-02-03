@@ -31,6 +31,25 @@ type Staff struct {
 	NoHP 				 string         		`bson:"nohp,omitempty" json:"nohp,omitempty"`
 	Akun         User               `bson:"akun,omitempty" json:"akun,omitempty"`
 }
+type Location struct {
+	Location 			string             `bson:"location,omitempty" json:"location,omitempty"`
+	Qty      string            			 `bson:"qty,omitempty" json:"qty,omitempty"`
+}
+
+type Gudang struct {
+	ID            primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`
+	Locations      []Location         `bson:"locations,omitempty" json:"locations,omitempty"`
+	Brand         string             `bson:"brand,omitempty" json:"brand,omitempty"`
+	Name          string             `bson:"name,omitempty" json:"name,omitempty"`
+	Category      string             `bson:"category,omitempty" json:"category,omitempty"`
+	SKU           string             `bson:"sku,omitempty" json:"sku,omitempty"`
+	SellingPrice  string             `bson:"sellingprice,omitempty" json:"sellingprice,omitempty"`
+	OriginalPrice string             `bson:"originalprice,omitempty" json:"originalprice,omitempty"`
+	Availability  string             `bson:"availability,omitempty" json:"availability,omitempty"`
+	Color         string             `bson:"color,omitempty" json:"color,omitempty"`
+	Breadcrumbs   string             `bson:"breadcrumbs,omitempty" json:"breadcrumbs,omitempty"`
+	Date          time.Time          `bson:"date,omitempty" json:"date,omitempty"`
+}
 
 type GudangA struct {
 	ID            primitive.ObjectID `bson:"_id,omitempty" json:"_id,omitempty"`

@@ -376,6 +376,15 @@ func TestGetAllGudangA(t *testing.T) {
 		fmt.Println(data)
 	}
 }
+func TestGetAllProducts(t *testing.T) {
+	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
+	data, err := module.GetAllProducts(conn)
+	if err != nil {
+		t.Errorf("Error get all : %v", err)
+	} else {
+		fmt.Println(data)
+	}
+}
 
 func TestGetGudangAFromID(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")

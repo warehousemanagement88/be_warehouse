@@ -639,6 +639,18 @@ func GCFHandlerDeleteGudangB(PASETOPUBLICKEYENV, MONGOCONNSTRINGENV, dbname stri
 	return GCFReturnStruct(Response)
 }
 
+func GCFHandlerGetAllProducts(MONGOCONNSTRINGENV, dbname string) string {
+	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
+	var Response model.Response
+	Response.Status = false
+	data, err := GetAllGudangB(conn)
+	if err != nil {
+		Response.Message = err.Error()
+		return GCFReturnStruct(Response)
+	}
+	return GCFReturnStruct(data)
+}
+
 func GCFHandlerGetAllGudangB(MONGOCONNSTRINGENV, dbname string) string {
 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
 	var Response model.Response

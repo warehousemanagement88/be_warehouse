@@ -451,6 +451,21 @@ func UpdateEmailUser(iduser primitive.ObjectID, db *mongo.Database, insertedDoc 
 	return nil
 }
 
+//Gudang
+func GetAllProducts(db *mongo.Database) (products []model.Gudang, err error) {
+	collection := db.Collection("gudang")
+	filter := bson.M{}
+	cursor, err := collection.Find(context.TODO(), filter)
+	if err != nil {
+		return products, fmt.Errorf("error GetAllGudang mongo: %s", err)
+	}
+	err = cursor.All(context.TODO(), &products)
+	if err != nil {
+		return products, fmt.Errorf("error GetAllGudang context: %s", err)
+	}
+	return products, nil
+}
+
 // Gudang A
 // insert gudang a
 func InsertGudangA(_id primitive.ObjectID, db *mongo.Database, insertedDoc model.GudangA) error {
