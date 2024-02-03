@@ -386,6 +386,29 @@ func TestGetAllProducts(t *testing.T) {
 	}
 }
 
+func TestSearchProductByName(t *testing.T) {
+	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
+
+	// Replace "Product_Name" with the name you want to search
+	productName := "SAMBAROSE Shoes"
+
+	results, err := module.SearchProductByName(productName, conn)
+	if err != nil {
+		t.Errorf("Error searching for product: %v", err)
+		return
+	}
+
+	if len(results) == 0 {
+		t.Errorf("No results found for product name: %s", productName)
+		return
+	}
+
+	// Print the results for debugging or validation
+	for _, result := range results {
+		fmt.Printf("Location: %s, ID: %s, Name: %s, Qty: %s\n", result.Location, result.ID.Hex(), result.Name, result.QTY)
+	}
+}
+
 func TestGetGudangAFromID(t *testing.T) {
 	conn := module.MongoConnect("MONGOSTRING", "warehouse_db")
 	id := "6561b5eb4390db31095e1c16"

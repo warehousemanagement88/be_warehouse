@@ -466,6 +466,56 @@ func GetAllProducts(db *mongo.Database) (products []model.Gudang, err error) {
 	return products, nil
 }
 
+func SearchProductByName(name string, db *mongo.Database) ([]model.SearchResult, error) {
+	var results []model.SearchResult
+
+	// Search in GudangA
+	gudangAResults, err := searchProductInCollection(name, db.Collection("gudanga"), "GudangA")
+	if err != nil {
+		return nil, err
+	}
+	results = append(results, gudangAResults...)
+
+	// Search in GudangB
+	gudangBResults, err := searchProductInCollection(name, db.Collection("gudangb"), "GudangB")
+	if err != nil {
+		return nil, err
+	}
+	results = append(results, gudangBResults...)
+
+	// Search in GudangC
+	gudangCResults, err := searchProductInCollection(name, db.Collection("gudangc"), "GudangC")
+	if err != nil {
+		return nil, err
+	}
+	results = append(results, gudangCResults...)
+
+	return results, nil
+}
+
+func searchProductInCollection(name string, collection *mongo.Collection, location string) ([]model.SearchResult, error) {
+	var results []model.SearchResult
+
+	filter := bson.M{"name": bson.M{"$regex": primitive.Regex{Pattern: name, Options: "i"}}}
+	cur, err := collection.Find(context.TODO(), filter)
+	if err != nil {
+		return nil, err
+	}
+	defer cur.Close(context.TODO())
+
+	for cur.Next(context.TODO()) {
+		var result model.SearchResult
+		err := cur.Decode(&result)
+		if err != nil {
+			return nil, err
+		}
+		result.Location = location
+		results = append(results, result)
+	}
+
+	return results, nil
+}
+
 // Gudang A
 // insert gudang a
 func InsertGudangA(_id primitive.ObjectID, db *mongo.Database, insertedDoc model.GudangA) error {
@@ -804,6 +854,12 @@ func GetUserLogin(PASETOPUBLICKEYENV string, r *http.Request) (model.Payload, er
 // get id
 func GetID(r *http.Request) string {
     return r.URL.Query().Get("id")
+}
+
+func GetProductName(r *http.Request) string {
+	// Implement logic to extract the product name parameter from the request.
+	// (You may use URL query parameters, path parameters, or any other method)
+	return r.URL.Query().Get("name")
 }
 
 // return struct

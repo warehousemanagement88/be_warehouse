@@ -651,6 +651,29 @@ func GCFHandlerGetAllProducts(MONGOCONNSTRINGENV, dbname string) string {
 	return GCFReturnStruct(data)
 }
 
+func GCFHandlerSearchProductByName(MONGOCONNSTRINGENV, dbname string, r *http.Request) string {
+	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
+
+	var Response model.Response
+	Response.Status = false
+
+	// Extract the product name from the request (you may adjust this based on your actual request structure)
+	productName := GetProductName(r)
+	if productName == "" {
+		Response.Message = "Product name parameter is missing"
+		return GCFReturnStruct(Response)
+	}
+
+	// Search products by name
+	data, err := SearchProductByName(productName, conn)
+	if err != nil {
+		Response.Message = err.Error()
+		return GCFReturnStruct(Response)
+	}
+
+	return GCFReturnStruct(data)
+}
+
 func GCFHandlerGetAllGudangB(MONGOCONNSTRINGENV, dbname string) string {
 	conn := MongoConnect(MONGOCONNSTRINGENV, dbname)
 	var Response model.Response
